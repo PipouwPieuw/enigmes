@@ -1,0 +1,112 @@
+@use "../../../../styles/includes.scss" as *;
+
+.app_gallery {
+	user-select: none;
+	font-size: 0;
+	background: url('/assets/images/manor/gallery/bg.png');
+	padding: 30px;
+	height: 100%;
+
+
+	&__portraits,
+	&__bolts {
+		width: 1290px;
+		margin: auto;
+		position: relative;
+	}
+
+	&__portraits {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 30px;
+	}
+
+	&__portrait,
+	&__bolt {
+		width: 300px;
+		height: 382px;
+	}
+
+	&__bolt {
+		position: absolute;
+
+		&:nth-child(1),
+		&:nth-child(1) {
+			left: 0;
+			top: 0;
+		}
+		&:nth-child(2),
+		&:nth-child(2) {
+			left: 330px;
+			top: 0;
+		}
+		&:nth-child(3),
+		&:nth-child(3) {
+			left: 660px;
+			top: 0;
+		}
+		&:nth-child(4),
+		&:nth-child(4) {
+			left: 990px;
+			top: 0;
+		}
+		&:nth-child(5),
+		&:nth-child(5) {
+			left: 0;
+			top: 412px;
+		}
+		&:nth-child(6),
+		&:nth-child(6) {
+			left: 330px;
+			top: 412px;
+		}
+		&:nth-child(7),
+		&:nth-child(7) {
+			left: 660px;
+			top: 412px;
+		}
+		&:nth-child(8),
+		&:nth-child(8) {
+			left: 990px;
+			top: 412px;
+		}
+	}
+
+	&__portrait {
+		position: relative;
+
+		&--selected {
+
+			&:before {
+				content: '';
+				position: absolute;
+				inset: 0;
+				pointer-events: none;
+				opacity: .2;
+				background: blue;
+			}
+		}
+
+		&_inner {
+			background: url('/assets/images/manor/gallery/frame.png') center no-repeat;
+			background-size: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			width: 300px;
+			height: 382px;
+		}
+	
+		img {
+			width: 250px;
+			height: auto;
+		}
+	}
+
+	&__bolt {
+		background: url('/assets/images/manor/gallery/nail.png') center top 60px no-repeat;
+		background-size: 20px auto;
+	}
+}

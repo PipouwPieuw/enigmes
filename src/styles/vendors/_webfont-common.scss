@@ -1,0 +1,132 @@
+@use "webfont-vars" as *;
+
+@font-face {
+  font-family: "webfont";
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto;
+  src: url("../../assets/fonticon/webfont.eot");
+  src: url("../../assets/fonticon/webfont.eot?#iefix") format("embedded-opentype"), url("../../assets/fonticon/webfont.woff2") format("woff2"), url("../../assets/fonticon/webfont.woff") format("woff"), url("../../assets/fonticon/webfont.ttf") format("truetype"), url("../../assets/fonticon/webfont.svg#webfont") format("svg");
+}
+
+.webfont {
+  @extend %webfont;
+}
+
+.webfont-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -0.0667em;
+}
+
+.webfont-xs {
+  font-size: 0.75em;
+}
+
+.webfont-sm {
+  font-size: 0.875em;
+}
+
+.webfont-1x {
+  font-size: 1em;
+}
+
+.webfont-2x {
+  font-size: 2em;
+}
+
+.webfont-3x {
+  font-size: 3em;
+}
+
+.webfont-4x {
+  font-size: 4em;
+}
+
+.webfont-5x {
+  font-size: 5em;
+}
+
+.webfont-6x {
+  font-size: 6em;
+}
+
+.webfont-7x {
+  font-size: 7em;
+}
+
+.webfont-8x {
+  font-size: 8em;
+}
+
+.webfont-9x {
+  font-size: 9em;
+}
+
+.webfont-10x {
+  font-size: 10em;
+}
+
+.webfont-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+.webfont-border {
+  border: solid 0.08em #eee;
+  border-radius: 0.1em;
+  padding: 0.2em 0.25em 0.15em;
+}
+
+.webfont-pull-left {
+  float: left;
+}
+
+.webfont-pull-right {
+  float: right;
+}
+
+.webfont.webfont-pull-left {
+  margin-right: 0.3em;
+}
+
+.webfont.webfont-pull-right {
+  margin-left: 0.3em;
+}
+
+
+.webfont-next::before {
+    content: "\ea01";
+}
+
+.webfont-sound-1::before {
+    content: "\ea02";
+}
+
+.webfont-sound-2::before {
+    content: "\ea03";
+}
+
+.webfont-sound-3::before {
+    content: "\ea04";
+}
+
+.webfont-sound-4::before {
+    content: "\ea05";
+}
+
+.webfont-sound-5::before {
+    content: "\ea06";
+}
+
+.webfont-sound-6::before {
+    content: "\ea07";
+}
+
+.webfont-sound-7::before {
+    content: "\ea08";
+}
+
+.webfont-sound-8::before {
+    content: "\ea09";
+}

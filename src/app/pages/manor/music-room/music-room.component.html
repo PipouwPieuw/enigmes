@@ -1,0 +1,21 @@
+<div class="app_music_room">
+	<div class="app_music_room__organ">
+		<div class="app_music_room__chords">
+			<div *ngFor="let chord of [].constructor(chordsAmount); let i=index" class="app_music_room__chord" [ngClass]="'app_music_room__chord--' + (i+1)">
+				<div class="organ_chord" [ngClass]="{'organ_chord--active': activeChords.has(i+1)}">
+					<span class="organ_chord__icon webfont" [ngClass]="'webfont-sound-' + (i+1)"></span>
+				</div>
+			</div>
+		</div>
+		<div class="app_music_room__keyboard">
+			<div *ngFor="let sound of [].constructor(soundsAmount); let i=index" class="app_music_room__key">
+				<button class="organ_key" [ngClass]="{'organ_key--active': activeKeys.has(i+1)}" (click)="keyPressed(i+1)">{{ i+1 }}</button>
+			</div>
+		</div>
+		<div class="app_music_room__keyboard_front">
+			<div *ngFor="let sound of [].constructor(soundsAmount); let i=index" class="app_music_room__key">
+				<button class="organ_key_front" [ngClass]="{'organ_key_front--active': activeKeys.has(i+1)}" (click)="keyPressed(i+1)"></button>
+			</div>
+		</div>
+	</div>
+</div>

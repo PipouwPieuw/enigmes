@@ -1,0 +1,12 @@
+<div class="app_map">
+	<div class="app_map__box">
+		<img class="app_map__picture" [src]="imgPath + 'map.png'"/>
+		<a
+			class="app_map__room"
+			*ngFor="let room of rooms|keyvalue"
+			[href]="room.value['href']"
+			[title]="room.value['name']"
+			[style]="'top:' + room.value['posY'] + '; left:' + room.value['posX'] + '; width:' + room.value['width'] + '; height:' + room.value['height'] + ';' "
+		></a>
+	</div>
+</div>

@@ -1,0 +1,90 @@
+@use "../../../../styles/includes.scss" as *;
+
+.app_art_room {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: url('/assets/images/manor/art-room/bg.png');
+	min-width: 1270px;
+
+	&__book {
+		position: relative;
+		height: 500px;
+		width: 1270px;	
+	}
+
+	&__cover,
+	&__inside {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		height: 100%;
+	}
+
+	&__cover--reverse {
+		@include rotateY(180deg);
+	}
+
+	&__row {
+		display: flex;
+		justify-content: center;
+		height: 100%;		
+	}
+
+	&__half {
+		flex: 0 0 50%;
+		display: flex;
+		align-items: center;
+		position: relative;
+
+		&--left {
+			justify-content: flex-end;
+		}
+	}
+
+	&__picture {
+		height: 386px;
+	}
+
+	&__nav {
+		position: absolute;
+		z-index: 1;
+		bottom: 0;
+		height: 100%;
+		width: 60px;
+		font-size: 50px;
+
+		&:before {
+			@extend %webfont;
+			content: $webfont-next;
+		}
+
+		&--prev {
+			left: 5px;
+
+			&:before {
+				@include rotateY(180deg);
+			}
+		}
+
+		&--next {
+			right: 5px;
+		}
+	}
+
+	&__overlay {
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, .7);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__magnified {
+
+	}
+}

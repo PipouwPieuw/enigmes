@@ -1,0 +1,24 @@
+@use "../../../../styles/includes.scss" as *;
+
+.app_map {
+	height: 100vh;
+	background: #0f173b;
+	@include flexCenter;
+	min-width: 1024px;
+	min-height: 600px;
+	overflow: auto;
+
+	&__box {
+		position: relative;
+	}
+
+	&__room {
+		position: absolute;
+		background: red;
+		opacity: .3;
+
+		&:not(:hover) {
+			opacity: 0;
+		}
+	}
+}

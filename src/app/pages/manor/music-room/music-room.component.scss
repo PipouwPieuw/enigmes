@@ -1,0 +1,103 @@
+@use "../../../../styles/includes.scss" as *;
+
+.app_music_room {
+
+	&__organ {
+		background: url('/assets/images/manor/music-room/organ.png') center no-repeat;
+		background-size: cover;
+		width: 100%;
+		aspect-ratio: 1920/1179;
+		position: relative;
+	}
+
+	&__keyboard {
+		pointer-events: none;
+		position: absolute;
+		z-index: 2;
+		left: 0;
+		right: 0;
+		top: 41vw;
+    	height: 10.5vw;
+    	width: 73vw;
+		margin: auto;
+		display: flex;
+		// transform: perspective(237px) rotateX(10deg);
+		transform: perspective(12.5vw) rotateX(10deg);
+	}
+
+	&__keyboard_front {		
+		position: absolute;
+		z-index: 1;
+		left: 0;
+		right: 0;
+		top: 49.5vw;
+	    height: 2vw;
+	    width: 76.4vw;
+	    margin: auto;
+		display: flex;
+		background: blue;
+	}
+
+	&__chords {
+		display: flex;
+		justify-content: center;
+		gap: 1.2vw;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 9.6vw;
+	}
+
+	&__chord {
+		font-size: 2.7vw;
+	}
+
+	&__key {
+		flex: 1;
+	}
+}
+
+.organ_chord {
+	width: 4vw;
+	height: 4vw;
+	border-radius: 50%;
+	background: #bc9e89;
+	border: 1px solid black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&--active {
+		background: green;
+	}
+}
+
+.organ_key {
+	pointer-events: all;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	width: 100%;
+	height: 8.7vw;
+	border: 2px solid black;
+	border-radius: 0 0 5px 5px;
+	background: #ecd0b6;
+	font-size: 16px;
+	padding-bottom: 15px;
+	font-weight: 700;
+
+	&--active {
+		background: blue;
+	}
+}
+
+.organ_key_front {
+	width: 100%;
+	height: 100%;
+	border: 2px solid black;
+	background: #ecd0b6;
+
+	&--active {
+		background: blue;
+	}
+}
