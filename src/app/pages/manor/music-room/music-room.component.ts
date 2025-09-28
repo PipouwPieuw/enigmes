@@ -20,15 +20,25 @@ export class MusicRoomComponent {
     activeKeys:Set<number> = new Set();
     activeChords:Set<number> = new Set();
     chords:object = {
-        1: [2,8,13],
-        2: [4,9,12],
-        3: [6,12,17],
-        4: [10,14,16],
-        5: [5,7,15],
-        6: [1,6,16],
-        7: [3,12,14],
-        8: [2,11,13]
+        0: [2,8,13], // ladder
+        1: [4,9,12], //pillar
+        2: [6,12,17], // bed
+        3: [10,14,16], // boat
+        4: [5,7,15], // door
+        5: [1,6,16], // skull
+        6: [3,12,14], // rudder
+        7: [2,11,13] // chimney
     };
+    icons = [
+        "ladder",
+        "pillar",
+        "bed",
+        "boat",
+        "door",
+        "skull",
+        "rudder",
+        "chimney"
+    ];
     pageText:string = "Texte d'explication de la page";
 
     keyPressed(index:number) {

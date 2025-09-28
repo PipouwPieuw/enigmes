@@ -1,34 +1,36 @@
 <app-top-bar [backLink]="'/manoir/carte'" [pageText]="pageText"></app-top-bar>
 <div class="app_art_room">
-	<div class="app_art_room__book">
-		<button *ngIf="pageCount == 0" (click)="incrementPageCount()">
-			<img class="app_art_room__cover" src="{{ imgPath }}artbook_cover.png"/>
-		</button>
-		<div class="app_art_room__row" *ngIf="isOpen()">
-			<button class="app_art_room__nav app_art_room__nav--prev" (click)="decrementPageCount()" *ngIf="!magnified">
-				<!-- <img class="app_art_room__arrow app_art_room__arrow--prev" src="{{ iconsPath }}next.svg"/> -->
+	<div class="app_art_room__box">
+		<div class="app_art_room__book">
+			<button *ngIf="pageCount == 0" (click)="incrementPageCount()">
+				<img class="app_art_room__cover" src="{{ imgPath }}artbook_cover.png"/>
 			</button>
-			<button class="app_art_room__nav app_art_room__nav--next" (click)="incrementPageCount()" *ngIf="!magnified">
-				<!-- <img class="app_art_room__arrow app_art_room__arrow--next" src="{{ iconsPath }}next.svg"/> -->
+			<div class="app_art_room__row" *ngIf="isOpen()">
+				<button class="app_art_room__nav app_art_room__nav--prev" (click)="decrementPageCount()" *ngIf="!magnified">
+					<!-- <img class="app_art_room__arrow app_art_room__arrow--prev" src="{{ iconsPath }}next.svg"/> -->
+				</button>
+				<button class="app_art_room__nav app_art_room__nav--next" (click)="incrementPageCount()" *ngIf="!magnified">
+					<!-- <img class="app_art_room__arrow app_art_room__arrow--next" src="{{ iconsPath }}next.svg"/> -->
+				</button>
+				<img class="app_art_room__inside" src="{{ imgPath }}artbook_open.png"/>
+				<div class="app_art_room__half app_art_room__half--left">
+					<button class="app_art_room__magnify" (click)="magnifyImage(pageCount*2-1)">
+						<img class="app_art_room__picture" [src]="imgPath + '0' + (pageCount*2-1) + '_artbook.png'"/>
+					</button>
+				</div>
+				<div class="app_art_room__half app_art_room__half--right">
+					<button class="app_art_room__magnify" (click)="magnifyImage(pageCount*2)">
+						<img class="app_art_room__picture" [src]="imgPath + '0' + pageCount*2 + '_artbook.png'"/>
+					</button>
+				</div>
+			</div>
+			<button *ngIf="pageCount > maxPages" (click)="decrementPageCount()">
+				<img class="app_art_room__cover app_art_room__cover--reverse" src="{{ imgPath }}artbook_cover.png"/>
 			</button>
-			<img class="app_art_room__inside" src="{{ imgPath }}artbook_open.png"/>
-			<div class="app_art_room__half app_art_room__half--left">
-				<button class="app_art_room__magnify" (click)="magnifyImage(pageCount*2-1)">
-					<img class="app_art_room__picture" [src]="imgPath + '0' + (pageCount*2-1) + '_artbook.png'"/>
-				</button>
-			</div>
-			<div class="app_art_room__half app_art_room__half--right">
-				<button class="app_art_room__magnify" (click)="magnifyImage(pageCount*2)">
-					<img class="app_art_room__picture" [src]="imgPath + '0' + pageCount*2 + '_artbook.png'"/>
-				</button>
-			</div>
+			<!-- Overlay -->
+			<button *ngIf="magnified" class="app_art_room__overlay" (click)="unmagnifyImage()">
+				<img class="app_art_room__magnified" [src]="imgPath + '0' + magnifiedIndex + '_artbook.png'"/>
+			</button>
 		</div>
-		<button *ngIf="pageCount > maxPages" (click)="decrementPageCount()">
-			<img class="app_art_room__cover app_art_room__cover--reverse" src="{{ imgPath }}artbook_cover.png"/>
-		</button>
-		<!-- Overlay -->
-		<button *ngIf="magnified" class="app_art_room__overlay" (click)="unmagnifyImage()">
-			<img class="app_art_room__magnified" [src]="imgPath + '0' + magnifiedIndex + '_artbook.png'"/>
-		</button>
 	</div>
 </div>

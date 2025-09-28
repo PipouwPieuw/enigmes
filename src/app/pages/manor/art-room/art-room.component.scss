@@ -1,12 +1,14 @@
 @use "../../../../styles/includes.scss" as *;
 
 .app_art_room {
-	min-height: calc(100vh - $topBarHeight);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: url('/assets/images/manor/art-room/bg.png');
-	min-width: 1270px;
+	overflow: auto;
+
+	&__box {
+		min-height: calc(100vh - $topBarHeight);
+		background: url('/assets/images/manor/art-room/bg.png');
+		@include flexCenter;
+		min-width: 1270px;
+	}
 
 	&__book {
 		position: relative;

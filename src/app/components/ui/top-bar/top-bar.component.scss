@@ -6,8 +6,17 @@
 	top: 0;
 	height: $topBarHeight;
 	width: 100%;
-	background: green;
+	padding: 0 20px;
+	background: #000000;
+	color: #FFFFFF;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	&__map {		
+		width: 44px;
+		height: 44px;
+		@include flexCenter;
+		font-size: 30px;
+	}
 }

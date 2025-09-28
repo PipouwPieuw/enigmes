@@ -94,39 +94,50 @@
   margin-left: 0.3em;
 }
 
-
-.webfont-next::before {
+.webfont-bed::before {
     content: "\ea01";
 }
 
-.webfont-sound-1::before {
+.webfont-boat::before {
     content: "\ea02";
 }
 
-.webfont-sound-2::before {
+.webfont-chimney::before {
     content: "\ea03";
 }
 
-.webfont-sound-3::before {
+.webfont-door::before {
     content: "\ea04";
 }
 
-.webfont-sound-4::before {
+.webfont-exit::before {
     content: "\ea05";
 }
 
-.webfont-sound-5::before {
+.webfont-info::before {
     content: "\ea06";
 }
 
-.webfont-sound-6::before {
+.webfont-ladder::before {
     content: "\ea07";
 }
 
-.webfont-sound-7::before {
+.webfont-map::before {
     content: "\ea08";
 }
 
-.webfont-sound-8::before {
+.webfont-next::before {
     content: "\ea09";
+}
+
+.webfont-pillar::before {
+    content: "\ea0a";
+}
+
+.webfont-rudder::before {
+    content: "\ea0b";
+}
+
+.webfont-skull::before {
+    content: "\ea0c";
 }

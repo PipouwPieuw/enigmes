@@ -3,7 +3,11 @@
 .app_modal {
 
 	&__toggle {
-
+		color: #FFFFFF;
+		width: 44px;
+		height: 44px;
+		@include flexCenter;
+		font-size: 30px;
 	}
 
 	&__overlay,
@@ -26,6 +30,7 @@
 		max-width: 100vw;
 		max-width: 100vh;
 		background: #FFFFFF;
+		color: #000000;
 		padding: 30px;
 	}
 }
