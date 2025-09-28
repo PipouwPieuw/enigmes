@@ -1,0 +1,3 @@
+<button (click)="toggleModal()" class="app_modal__toggle">Afficher le texte</button>
+<button *ngIf="isDisplayed" (click)="toggleModal()" class="app_modal__overlay"></button>
+<div *ngIf="isDisplayed" class="app_modal__box">{{ text }}</div>

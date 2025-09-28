@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { TopBarComponent } from '../../../components/ui/top-bar/top-bar.component';
+
 @Component({
     selector: 'app-gallery',
     imports: [
-        CommonModule
+        CommonModule,
+        TopBarComponent
     ],
     templateUrl: './gallery.component.html',
     styleUrl: './gallery.component.scss'
@@ -22,6 +25,7 @@ export class GalleryComponent {
         7
     ];
     selectedPortrait:number = -1;
+    pageText:string = "Texte d'explication de la page";
 
     selectPortrait(index:number) {
         // Unselect portrait if clicked a second time

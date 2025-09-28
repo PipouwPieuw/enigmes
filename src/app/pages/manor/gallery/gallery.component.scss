@@ -1,11 +1,11 @@
 @use "../../../../styles/includes.scss" as *;
 
 .app_gallery {
+	min-height: calc(100vh - $topBarHeight);
 	user-select: none;
 	font-size: 0;
 	background: url('/assets/images/manor/gallery/bg.png');
 	padding: 30px;
-	height: 100%;
 
 
 	&__portraits,

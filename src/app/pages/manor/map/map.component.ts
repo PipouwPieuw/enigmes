@@ -2,9 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {KeyValue} from '@angular/common';
 
+import { TopBarComponent } from '../../../components/ui/top-bar/top-bar.component';
+
 @Component({
     selector: 'app-map',
-    imports: [CommonModule],
+    imports: [
+        CommonModule,
+        TopBarComponent
+    ],
     templateUrl: './map.component.html',
     styleUrl: './map.component.scss'
 })
@@ -35,5 +40,6 @@ export class MapComponent {
             'width': '7%',
             'height': '18%'
         }
-    }
+    };
+    pageText:string = "Texte d'explication de la page";
 }

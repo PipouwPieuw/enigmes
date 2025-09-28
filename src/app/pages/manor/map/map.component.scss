@@ -1,11 +1,11 @@
 @use "../../../../styles/includes.scss" as *;
 
 .app_map {
-	height: 100vh;
+	min-height: calc(100vh - $topBarHeight);
 	background: #0f173b;
 	@include flexCenter;
 	min-width: 1024px;
-	min-height: 600px;
+	height: 600px;
 	overflow: auto;
 
 	&__box {

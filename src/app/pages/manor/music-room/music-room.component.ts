@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { TopBarComponent } from '../../../components/ui/top-bar/top-bar.component';
+
 @Component({
     selector: 'app-music-room',
-    imports: [CommonModule],
+    imports: [
+        CommonModule,
+        TopBarComponent
+    ],
     templateUrl: './music-room.component.html',
     styleUrl: './music-room.component.scss'
 })
@@ -24,6 +29,7 @@ export class MusicRoomComponent {
         7: [3,12,14],
         8: [2,11,13]
     };
+    pageText:string = "Texte d'explication de la page";
 
     keyPressed(index:number) {
         var self = this;

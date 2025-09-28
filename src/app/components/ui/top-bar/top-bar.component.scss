@@ -1,0 +1,13 @@
+@use "../../../../styles/includes.scss" as *;
+
+.app_top_bar {
+	position: sticky;
+	z-index: 9;
+	top: 0;
+	height: $topBarHeight;
+	width: 100%;
+	background: green;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

@@ -1,7 +1,7 @@
 @use "../../../../styles/includes.scss" as *;
 
 .app_art_room {
-	min-height: 100vh;
+	min-height: calc(100vh - $topBarHeight);
 	display: flex;
 	align-items: center;
 	justify-content: center;

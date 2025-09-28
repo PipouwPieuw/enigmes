@@ -1,6 +1,7 @@
 @use "../../../../styles/includes.scss" as *;
 
 .app_music_room {
+	min-height: calc(100vh - $topBarHeight);
 
 	&__organ {
 		background: url('/assets/images/manor/music-room/organ.png') center no-repeat;
