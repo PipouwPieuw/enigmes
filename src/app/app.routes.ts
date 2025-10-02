@@ -5,6 +5,7 @@ import { ArtRoomComponent } from './pages/manor/art-room/art-room.component';
 import { MusicRoomComponent } from './pages/manor/music-room/music-room.component';
 import { GalleryComponent } from './pages/manor/gallery/gallery.component';
 import { GreenhouseComponent } from './pages/manor/greenhouse/greenhouse.component';
+import { DiningRoomComponent } from './pages/manor/dining-room/dining-room.component';
 
 export const routes: Routes = [
 	{
@@ -29,7 +30,12 @@ export const routes: Routes = [
 	},
 	{
 	    path: 'manoir/greenhouse',
-	    title: 'Greenhouse',
+	    title: 'Serre',
 	    component: GreenhouseComponent,
+	},
+	{
+	    path: 'manoir/dining-room',
+	    title: 'Salle à manger',
+	    component: DiningRoomComponent,
 	}
 ];

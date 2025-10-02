@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {KeyValue} from '@angular/common';
+import { CommonModule, KeyValue } from '@angular/common';
 
 import { TopBarComponent } from '../../../components/ui/top-bar/top-bar.component';
 
@@ -39,6 +38,22 @@ export class MapComponent {
             'posY': '23%',
             'width': '7%',
             'height': '18%'
+        },
+        3: {
+            'name': 'Serre',
+            'href': '/manoir/greenhouse',
+            'posX': '27%',
+            'posY': '0%',
+            'width': '27%',
+            'height': '23%'
+        },
+        4: {
+            'name': 'Salle à manger',
+            'href': '/manoir/dining-room',
+            'posX': '37%',
+            'posY': '53%',
+            'width': '18%',
+            'height': '20%'
         }
     };
     pageText:string = "Texte d'explication de la page";

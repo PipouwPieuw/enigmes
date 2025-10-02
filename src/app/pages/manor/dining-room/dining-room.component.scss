@@ -1,0 +1,104 @@
+@use "../../../../styles/includes.scss" as *;
+
+.app_dining_room {
+	overflow: auto;
+
+	&__box {
+		@include flexCenter;
+		min-height: calc(100vh - $topBarHeight);
+		min-width: 690px;
+		background: #0f272f;
+	}
+
+	&__clock {
+		width: 690px;
+		height: 700px;
+		position: relative;
+	}
+
+	&__hand {
+		position: absolute;
+		width: 300px;
+		height: 300px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		margin: auto;
+
+		img {
+			position: absolute;
+			left: 0;
+			right: 0;
+			margin: auto;
+		}
+
+		&--digits img {	
+			bottom: calc(50% - 14px);
+		}
+
+		&--symbols img {	
+			bottom: calc(50% - 14px);
+		}
+	}
+
+	&__list_triggers {
+		pointer-events: none;
+
+		li {
+			position: absolute;
+			left: 0;
+			right: 0;
+			margin: auto;
+			text-align: center;
+
+			> span {
+				display: block;
+			}
+		}
+
+		&--digits {
+			position: absolute;
+			width: 332px;
+			height: 332px;
+			top: 186px;
+			left: 180px;
+
+			li {
+				top: 0;
+				height: 100%;
+				width: 50px;
+			}
+		}
+
+		&--symbols {
+			position: absolute;
+			width: 575px;
+			height: 565px;
+			top: 70px;
+			left: 60px;
+
+			li {
+				top: 0;
+				height: 100%;
+				width: 100px;
+			}
+		}
+	}
+
+	&__digit {
+		pointer-events: all;
+		display: block;
+		width: 100%;
+		height: 70px;
+		cursor: pointer;
+	}
+
+	&__symbol {
+		pointer-events: all;
+		display: block;
+		width: 100%;
+		height: 90px;
+		cursor: pointer;
+	}
+}
