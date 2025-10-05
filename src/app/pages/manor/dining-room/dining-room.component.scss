@@ -29,7 +29,6 @@
 
 		&--symbols {
 			padding-left: 4px;
-			transition: all .5s ease;
 			@include flexCenter;
 		}
 	}
@@ -95,7 +94,6 @@
 		&--symbols {
 			width: 565px;
 			height: 565px;
-			transition: all .5s ease;
 
 			li {
 				top: 0;

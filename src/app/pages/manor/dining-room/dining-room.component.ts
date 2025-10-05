@@ -23,6 +23,7 @@ export class DiningRoomComponent {
     symbolsClockRotation = 1;
     indexes:any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     rotationStep:number = 30;
+    transitionSpeed:number = 1;
     digits:object = {
         1: {
             'value': 1,
@@ -167,14 +168,18 @@ export class DiningRoomComponent {
     setSymbolsClockRotation(value:number) {
         var diff:number = this.getValDiff(this.symbolsClockValue, value);
         var rotation:number = 0;
+        var speed = 0;
         if(diff <= 6) {
+            speed = diff;
             rotation = diff * this.rotationStep;
             this.symbolsClockRotation -= rotation;
         }
         else {
+            speed = 12 - diff;
             rotation = (12 - diff) * this.rotationStep;
             this.symbolsClockRotation += rotation;
         }
+        this.transitionSpeed = speed;
         this.symbolsClockValue = value;
     }
 
