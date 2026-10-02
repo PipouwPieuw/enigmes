@@ -46,14 +46,14 @@ export class MusicRoomComponent {
         if(this.activeKeys.has(index)) {
             this.activeKeys.delete(index);
             if(this.playingSound == index) {
-                this.playingSound == 0;
+                this.playingSound = 0;
                 this.audio.pause();
             }
         }
         else {
             this.activeKeys.add(index);
             this.playingSound = index;
-            this.audio.src = '/assets/sound/manor/music-room/' + index + '.wav';
+            this.audio.src = 'assets/sound/manor/music-room/' + index + '.wav';
             this.audio.load();
             this.audio.play();
             this.audio.onended = function() {

@@ -1,0 +1,14 @@
+---
+description: SCSS and BEM naming conventions
+globs: "**/*.{scss,css}"
+alwaysApply: false
+---
+
+# SCSS Conventions
+
+- BEM with `app_` prefix: `.app_{block}__{element}`, `.app_{block}__{element}--{modifier}`.
+- Component SCSS: `@use "../../../../styles/includes.scss" as *;` (adjust depth as needed).
+- Nest with `&__` and `&--`; use project mixins (`flexCenter`, `transition`, breakpoints).
+- Colors/fonts: use variables from `styles/abstracts/variables/`, not hardcoded values in new code.
+- Icon fonts: `webfont webfont-{name}` classes alongside accessible labels in HTML.
+- Global utilities: `.sr_only`, `.hidden` in `styles/base/_global.scss`.

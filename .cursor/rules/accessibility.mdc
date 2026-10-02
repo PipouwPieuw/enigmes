@@ -1,0 +1,40 @@
+---
+description: Accessibility requirements for all HTML templates
+globs: "**/*.{html,component.html}"
+alwaysApply: false
+---
+
+# Accessibility (mandatory)
+
+Every interactive or meaningful element must work with screen readers and keyboard navigation.
+
+## Required practices
+
+- Use semantic HTML first (`button`, `a`, `nav`, `main`, headings in order).
+- Icon-only controls: `aria-label` (or visible text + `aria-hidden` on the icon). Don't rely on `title` alone.
+- Images: meaningful `alt`; decorative images use `alt=""` and `aria-hidden="true"` if needed.
+- Modals/dialogs: `role="dialog"`, `aria-modal="true"`, `aria-labelledby` / `aria-describedby`, focus trap, Escape to close, restore focus on close. Prefer Angular CDK where appropriate.
+- Dynamic state: `aria-expanded`, `aria-pressed`, `aria-live` for announcements.
+- Custom controls: appropriate `role`, keyboard support, visible focus styles.
+- Use existing `.sr_only` for visually hidden but screen-reader-visible text.
+
+## Avoid
+
+- Clickable `div`/`span` without role, keyboard support, and accessible name.
+- Removing focus outlines without an accessible alternative.
+- `tabindex` > 0.
+
+## Example (icon button)
+
+BAD: `<button class="webfont webfont-info" title="Informations"></button>`
+
+GOOD:
+
+```html
+<button
+  type="button"
+  class="webfont webfont-info"
+  aria-label="Informations de la page"
+  [attr.aria-expanded]="isDisplayed"
+></button>
+```

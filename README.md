@@ -1,27 +1,53 @@
 # Enigmes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.4.
+Interactive puzzle game built with Angular. The game is made of **several standalone parts** that can be solved independently from one another. The first part in development is **Le Manoir** (The Manor).
 
-## Development server
+> Product and design docs live in [`docs/`](./docs/README.md). This README covers orientation and local development.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Game at a glance
 
-## Code scaffolding
+| Part | Status | Description |
+|------|--------|-------------|
+| **Le Manoir** | In progress | Explore rooms via a house plan. Rooms may contain a puzzle, clues for other rooms, or both. |
+| *Other parts* | Not started | Planned as separate, independently solvable sections. |
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The overarching win condition (what happens when a part — or the whole game — is solved) is **not defined yet**.
 
-## Build
+## Documentation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+| Doc | Contents |
+|-----|----------|
+| [Documentation index](./docs/README.md) | Map of all docs |
+| [TODO / Roadmap](./docs/TODO.md) | Living development checklist |
+| [Technical audit](./docs/technical-audit.md) | Stack health and modernization advice |
+| [Game design](./docs/game-design.md) | Product vision, parts, open questions |
+| [Manor overview](./docs/manor/overview.md) | Hub, navigation, room roles |
+| [Manor rooms](./docs/manor/rooms.md) | Per-room puzzles, clues, implementation status |
+| [Architecture](./docs/architecture.md) | Tech stack, folder structure, routing |
 
-## Running unit tests
+## Stack
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Angular 19 (standalone components)
+- TypeScript
+- SCSS (BEM with `app_` prefix)
+- Karma / Jasmine for unit tests
 
-## Running end-to-end tests
+## Local development
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+npm install
+npm start
+```
 
-## Further help
+Open `http://localhost:4200/` (redirects to `/manoir/carte`).
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| Script | Purpose |
+|--------|---------|
+| `npm start` | Dev server (`ng serve`) |
+| `npm run build` | Production build → `dist/enigmes` |
+| `npm run buildprod` | Build for path `/rutabaga/` → `dist/rutabaga` |
+| `npm test` | Unit tests |
+
+## Project conventions
+
+Cursor rules under [`.cursor/rules/`](./.cursor/rules/) encode front-end standards (Angular, SCSS, accessibility). Prefer those over inventing new patterns.

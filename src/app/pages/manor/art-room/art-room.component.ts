@@ -13,7 +13,7 @@ import { TopBarComponent } from '../../../components/ui/top-bar/top-bar.componen
     styleUrl: './art-room.component.scss'
 })
 export class ArtRoomComponent {
-    imgPath:string = '/assets/images/manor/art-room/';
+    imgPath:string = 'assets/images/manor/art-room/';
     pageCount:number = 0;
     maxPages:number = 4;
     magnified:boolean = false;

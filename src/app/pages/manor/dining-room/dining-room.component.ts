@@ -13,7 +13,7 @@ import { TopBarComponent } from '../../../components/ui/top-bar/top-bar.componen
     styleUrl: './dining-room.component.scss'
 })
 export class DiningRoomComponent {
-    imgPath:string = '/assets/images/manor/dining-room/';
+    imgPath:string = 'assets/images/manor/dining-room/';
     pageText:string = "Texte d'explication de la page";
     digitsValue = 12;
     digitsRotation = 1;

@@ -1,0 +1,18 @@
+---
+description: Angular conventions for this project
+globs: "**/*.ts"
+alwaysApply: false
+---
+
+# Angular Conventions (Pierre's style)
+
+- Standalone components only; declare dependencies in `imports`.
+- Use `templateUrl` + `styleUrl` (not inline templates/styles).
+- Selectors: `app-{name}`; files: `{name}.component.ts` in kebab-case folders.
+- Pages: `src/app/pages/manor/{room}/`; shared UI: `src/app/components/ui/`.
+- Import order: Angular core → Angular common/forms/router → local components.
+- Room pages include `TopBarComponent` with `backLink` and `pageText` where applicable.
+- Route `title` in French; paths match existing `app.routes.ts` patterns.
+- Prefer typed models over loose `object` for new code; keep numeric-key objects only where already established.
+- Assets: `assets/images/...`, `assets/sound/...` (no leading `/` — base-href safe).
+- In-app navigation: `routerLink` / `[routerLink]`, never absolute `href` to app routes.

@@ -13,7 +13,7 @@ import { TopBarComponent } from '../../../components/ui/top-bar/top-bar.componen
     styleUrl: './gallery.component.scss'
 })
 export class GalleryComponent {
-    imgPath:string = '/assets/images/manor/gallery/';
+    imgPath:string = 'assets/images/manor/gallery/';
     portraits = [
         0,
         1,

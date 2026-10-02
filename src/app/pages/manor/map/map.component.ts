@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule, KeyValue } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 import { TopBarComponent } from '../../../components/ui/top-bar/top-bar.component';
 
@@ -7,17 +8,18 @@ import { TopBarComponent } from '../../../components/ui/top-bar/top-bar.componen
     selector: 'app-map',
     imports: [
         CommonModule,
+        RouterLink,
         TopBarComponent
     ],
     templateUrl: './map.component.html',
     styleUrl: './map.component.scss'
 })
 export class MapComponent {
-    imgPath:string = '/assets/images/manor/map/';
+    imgPath:string = 'assets/images/manor/map/';
     rooms:object = {
         0: {
             'name': 'Salle de musique',
-            'href': '/manoir/salle-de-musique',
+            'route': '/manoir/salle-de-musique',
             'posX': '11.8%',
             'posY': '17%',
             'width': '13%',
@@ -25,7 +27,7 @@ export class MapComponent {
         },
         1: {
             'name': 'Atelier d\'Arts',
-            'href': '/manoir/atelier-d-arts',
+            'route': '/manoir/atelier-d-arts',
             'posX': '71%',
             'posY': '23%',
             'width': '14%',
@@ -33,7 +35,7 @@ export class MapComponent {
         },
         2: {
             'name': 'Galerie',
-            'href': '/manoir/galerie',
+            'route': '/manoir/galerie',
             'posX': '85.5%',
             'posY': '23%',
             'width': '7%',
@@ -41,7 +43,7 @@ export class MapComponent {
         },
         3: {
             'name': 'Serre',
-            'href': '/manoir/greenhouse',
+            'route': '/manoir/greenhouse',
             'posX': '27%',
             'posY': '0%',
             'width': '27%',
@@ -49,7 +51,7 @@ export class MapComponent {
         },
         4: {
             'name': 'Salle à manger',
-            'href': '/manoir/dining-room',
+            'route': '/manoir/dining-room',
             'posX': '37%',
             'posY': '53%',
             'width': '18%',

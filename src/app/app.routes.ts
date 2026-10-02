@@ -9,6 +9,11 @@ import { DiningRoomComponent } from './pages/manor/dining-room/dining-room.compo
 
 export const routes: Routes = [
 	{
+	    path: '',
+	    pathMatch: 'full',
+	    redirectTo: 'manoir/carte',
+	},
+	{
 	    path: 'manoir/carte',
 	    title: 'Carte',
 	    component: MapComponent,
@@ -37,5 +42,9 @@ export const routes: Routes = [
 	    path: 'manoir/dining-room',
 	    title: 'Salle à manger',
 	    component: DiningRoomComponent,
-	}
+	},
+	{
+	    path: '**',
+	    redirectTo: 'manoir/carte',
+	},
 ];

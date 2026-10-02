@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 import { ModalComponent } from '../modal/modal.component';
 
@@ -7,6 +8,7 @@ import { ModalComponent } from '../modal/modal.component';
     selector: 'app-top-bar',
     imports: [
         CommonModule,
+        RouterLink,
         ModalComponent,
     ],
     templateUrl: './top-bar.component.html',
