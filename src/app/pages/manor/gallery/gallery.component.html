@@ -8,12 +8,29 @@
 	<ul class="app_gallery__portraits">
 		@for (portrait of portraits(); track $index) {
 			<li
+				#portraitSlot
 				class="app_gallery__portrait"
+				[attr.data-slot-index]="$index"
 				[class]="'portrait_' + portrait"
 				[class.app_gallery__portrait--selected]="selectedPortrait() === portrait"
+				[class.app_gallery__portrait--dragging]="draggingSlot() === $index"
+				[class.app_gallery__portrait--drop-target]="dropTargetSlot() === $index"
+				[class.app_gallery__portrait--animating]="isAnimating()"
 			>
-				<button class="app_gallery__portrait_inner" [class]="'portrait_inner_' + portrait" (click)="selectPortrait(portrait)">
-					<img [src]="imgPath + portrait + '.png'" [alt]="'Portrait ' + portrait">
+				<button
+					type="button"
+					class="app_gallery__portrait_inner"
+					[class]="'portrait_inner_' + portrait"
+					[attr.aria-label]="'Portrait ' + (portrait + 1)"
+					[attr.aria-pressed]="selectedPortrait() === portrait"
+					[attr.aria-grabbed]="draggingSlot() === $index"
+					(pointerdown)="onPointerDown($event, $index)"
+					(pointermove)="onPointerMove($event)"
+					(pointerup)="onPointerUp($event)"
+					(pointercancel)="onPointerCancel($event)"
+					(click)="onPortraitClick(portrait)"
+				>
+					<img [src]="imgPath + portrait + '.png'" [alt]="'Portrait ' + (portrait + 1)" draggable="false">
 				</button>
 			</li>
 		}
