@@ -1,85 +1,89 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 
 import { TopBarComponent } from '../../../components/ui/top-bar/top-bar.component';
+
+interface OrganChord {
+    keys: readonly number[];
+    icon: string;
+}
 
 @Component({
     selector: 'app-music-room',
     imports: [
-        CommonModule,
         TopBarComponent
     ],
     templateUrl: './music-room.component.html',
-    styleUrl: './music-room.component.scss'
+    styleUrl: './music-room.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MusicRoomComponent {
-    soundsAmount:number = 17;
-    chordsAmount:number = 8;
-    playingSound:number = 0;
+    readonly soundsAmount = 17;
+    readonly chordsAmount = 8;
+    readonly keyIndexes = Array.from({ length: this.soundsAmount }, (_, i) => i + 1);
+    readonly playingSound = signal(0);
+    readonly activeKeys = signal<ReadonlySet<number>>(new Set());
+    readonly activeChords = signal<ReadonlySet<number>>(new Set());
+    readonly isWin = computed(() => this.activeChords().size === this.chordsAmount);
     audio = new Audio();
-    activeKeys:Set<number> = new Set();
-    activeChords:Set<number> = new Set();
-    chords:object = {
-        0: [2,8,13], // ladder
-        1: [4,9,12], //pillar
-        2: [6,12,17], // bed
-        3: [10,14,16], // boat
-        4: [5,7,15], // door
-        5: [1,6,16], // skull
-        6: [3,12,14], // rudder
-        7: [2,11,13] // chimney
-    };
-    icons = [
-        "ladder",
-        "pillar",
-        "bed",
-        "boat",
-        "door",
-        "skull",
-        "rudder",
-        "chimney"
+    readonly chords: readonly OrganChord[] = [
+        { keys: [2, 8, 13], icon: 'ladder' },
+        { keys: [4, 9, 12], icon: 'pillar' },
+        { keys: [6, 12, 17], icon: 'bed' },
+        { keys: [10, 14, 16], icon: 'boat' },
+        { keys: [5, 7, 15], icon: 'door' },
+        { keys: [1, 6, 16], icon: 'skull' },
+        { keys: [3, 12, 14], icon: 'rudder' },
+        { keys: [2, 11, 13], icon: 'chimney' },
     ];
-    pageText:string = "Texte d'explication de la page";
+    pageText = "Texte d'explication de la page";
 
     keyPressed(index:number) {
-        var self = this;
-        if(this.activeKeys.has(index)) {
-            this.activeKeys.delete(index);
-            if(this.playingSound == index) {
-                this.playingSound = 0;
+        const wasActive = this.activeKeys().has(index);
+
+        this.activeKeys.update((keys) => {
+            const next = new Set(keys);
+            if (wasActive) {
+                next.delete(index);
+            } else {
+                next.add(index);
+            }
+            return next;
+        });
+
+        if (wasActive) {
+            if (this.playingSound() === index) {
+                this.playingSound.set(0);
                 this.audio.pause();
             }
-        }
-        else {
-            this.activeKeys.add(index);
-            this.playingSound = index;
+        } else {
+            this.playingSound.set(index);
             this.audio.src = 'assets/sound/manor/music-room/' + index + '.wav';
             this.audio.load();
             this.audio.play();
-            this.audio.onended = function() {
-                self.playingSound = 0;
+            this.audio.onended = () => {
+                this.playingSound.set(0);
             };
         }
         this.checkChord();
     }
 
     checkChord() {
-        var keys = Array.from(this.activeKeys);
-        for(var chord in this.chords) {
-            if(this.compareSets(this.chords[chord as keyof object], keys) && !this.activeChords.has(+chord)) {
-                this.activeChords.add(+chord);
-                this.activeKeys.clear();
+        const keys = Array.from(this.activeKeys());
+        this.chords.forEach((chord, chordIndex) => {
+            if (this.compareSets([...chord.keys], keys) && !this.activeChords().has(chordIndex)) {
+                this.activeChords.update((chords) => new Set(chords).add(chordIndex));
+                this.activeKeys.set(new Set());
             }
-        }
-        if(this.activeChords.size == this.chordsAmount) {
+        });
+        if (this.isWin()) {
             console.log("WIN");
         }
     }
 
-    compareSets(set1:Array<number>, set2:Array<number>) {
+    compareSets(set1:number[], set2:number[]) {
         if(set1.length != set2.length)
             return false;
-        for(var i in set1)
+        for(const i in set1)
             if(!set2.includes(set1[i]))
                 return false;
         return true;

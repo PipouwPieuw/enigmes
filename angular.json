@@ -5,7 +5,11 @@
   "projects": {
     "enigmes": {
       "projectType": "application",
-      "schematics": { "@schematics/angular:component": { "style": "scss" } },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -21,6 +25,11 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              {
+                "glob": "**/*",
+                "input": "public",
+                "output": "/"
+              },
               {
                 "glob": "**/*",
                 "input": "src/assets",
@@ -87,6 +96,11 @@
             "assets": [
               {
                 "glob": "**/*",
+                "input": "public",
+                "output": "/"
+              },
+              {
+                "glob": "**/*",
                 "input": "src/assets",
                 "output": "/assets"
               }
@@ -101,8 +115,22 @@
               ]
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }

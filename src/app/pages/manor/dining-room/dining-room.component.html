@@ -10,52 +10,56 @@
 			<div
 				class="app_dining_room__clock app_dining_room__clock--symbols"
 				[style]="'
-					transform: rotate(' + (45 + symbolsClockRotation) + 'deg);
-					transition: all ' + (.3 * transitionSpeed) + 's ease-in-out;
+					transform: rotate(' + (45 + symbolsClockRotation()) + 'deg);
+					transition: all ' + (.3 * transitionSpeed()) + 's ease-in-out;
 				'"
 			>
 				<img [src]="imgPath + 'clock_symbols.png'" alt=""/>
-				<div class="app_dining_room__hand app_dining_room__hand--symbols" [style]="'transform: rotate(' + (symbolsRotation - 45) + 'deg);'">
+				<div class="app_dining_room__hand app_dining_room__hand--symbols" [style]="'transform: rotate(' + (symbolsRotation() - 45) + 'deg);'">
 					<img [src]="imgPath + 'hand_symbols.png'" alt=""/>
 				</div>
 			</div>
-			<div class="app_dining_room__hand app_dining_room__hand--digits" [style]="'transform: rotate(' + digitsRotation + 'deg);'">
+			<div class="app_dining_room__hand app_dining_room__hand--digits" [style]="'transform: rotate(' + digitsRotation() + 'deg);'">
 				<img [src]="imgPath + 'hand_digits.png'" alt=""/>
 			</div>
 			<ul
 				class="app_dining_room__list_triggers app_dining_room__list_triggers--symbols"
 				[style]="'
-					transform: rotate(' + symbolsClockRotation + 'deg);
-					transition: all ' + (.3 * transitionSpeed) + 's ease-in-out;
+					transform: rotate(' + symbolsClockRotation() + 'deg);
+					transition: all ' + (.3 * transitionSpeed()) + 's ease-in-out;
 				'"
 			>
-				<li *ngFor="let symbol of symbols|keyvalue" [style]="'transform: rotate(' + symbol.value['rotation'] + 'deg);'">
-					<button
-						class="app_dining_room__button app_dining_room__button--symbol"
-						[attr.data-val]="symbol.value['value']"
-						[attr.aria-label]="'Symbole ' + symbol.value['value']"
-						(click)="setSymbolsRotation(symbol.value['value'])"
-					></button>
-					<button
-						class="app_dining_room__button app_dining_room__button--rotation"
-						[ngClass]="{'app_dining_room__button--active': symbolsClockValue == symbol.value['value'] }"
-						[attr.data-val]="symbol.value['value']"
-						[attr.aria-label]="'Tourner le cadran des symboles vers ' + symbol.value['value']"
-						(click)="setSymbolsClockRotation(symbol.value['value'])"
-					>
-						<img [src]="imgPath + 'arrow.png'" alt=""/>
-					</button>
-				</li>
+				@for (symbol of symbols; track symbol.value) {
+					<li [style]="'transform: rotate(' + symbol.rotation + 'deg);'">
+						<button
+							class="app_dining_room__button app_dining_room__button--symbol"
+							[attr.data-val]="symbol.value"
+							[attr.aria-label]="'Symbole ' + symbol.value"
+							(click)="setSymbolsRotation(symbol.value)"
+						></button>
+						<button
+							class="app_dining_room__button app_dining_room__button--rotation"
+							[class.app_dining_room__button--active]="symbolsClockValue() === symbol.value"
+							[attr.data-val]="symbol.value"
+							[attr.aria-label]="'Tourner le cadran des symboles vers ' + symbol.value"
+							(click)="setSymbolsClockRotation(symbol.value)"
+						>
+							<img [src]="imgPath + 'arrow.png'" alt=""/>
+						</button>
+					</li>
+				}
 			</ul>
 			<ul class="app_dining_room__list_triggers app_dining_room__list_triggers--digits">
-				<li *ngFor="let digit of digits|keyvalue" [style]="'transform: rotate(' + digit.value['rotation'] + 'deg);'">
-					<button
-						class="app_dining_room__button app_dining_room__button--digit"
-						[attr.data-val]="digit.value['value']"
-						[attr.aria-label]="'Chiffre ' + digit.value['value']"
-						(click)="setDigitsRotation(digit.value['value'])"
-					></button>
-				</li>
+				@for (digit of digits; track digit.value) {
+					<li [style]="'transform: rotate(' + digit.rotation + 'deg);'">
+						<button
+							class="app_dining_room__button app_dining_room__button--digit"
+							[attr.data-val]="digit.value"
+							[attr.aria-label]="'Chiffre ' + digit.value"
+							(click)="setDigitsRotation(digit.value)"
+						></button>
+					</li>
+				}
 			</ul>
 		</div>
 	</div>

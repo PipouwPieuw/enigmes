@@ -1,12 +1,5 @@
 import { Routes } from '@angular/router';
 
-import { MapComponent } from './pages/manor/map/map.component';
-import { ArtRoomComponent } from './pages/manor/art-room/art-room.component';
-import { MusicRoomComponent } from './pages/manor/music-room/music-room.component';
-import { GalleryComponent } from './pages/manor/gallery/gallery.component';
-import { GreenhouseComponent } from './pages/manor/greenhouse/greenhouse.component';
-import { DiningRoomComponent } from './pages/manor/dining-room/dining-room.component';
-
 export const routes: Routes = [
 	{
 	    path: '',
@@ -16,32 +9,48 @@ export const routes: Routes = [
 	{
 	    path: 'manoir/carte',
 	    title: 'Carte',
-	    component: MapComponent,
+	    loadComponent: () =>
+	        import('./pages/manor/map/map.component').then((m) => m.MapComponent),
 	},
 	{
 	    path: 'manoir/atelier-d-arts',
 	    title: 'Atelier d\'Art',
-	    component: ArtRoomComponent,
+	    loadComponent: () =>
+	        import('./pages/manor/art-room/art-room.component').then((m) => m.ArtRoomComponent),
 	},
 	{
 	    path: 'manoir/salle-de-musique',
 	    title: 'Salle de musique',
-	    component: MusicRoomComponent,
+	    loadComponent: () =>
+	        import('./pages/manor/music-room/music-room.component').then((m) => m.MusicRoomComponent),
 	},
 	{
 	    path: 'manoir/galerie',
 	    title: 'Galerie',
-	    component: GalleryComponent,
+	    loadComponent: () =>
+	        import('./pages/manor/gallery/gallery.component').then((m) => m.GalleryComponent),
+	},
+	{
+	    path: 'manoir/serre',
+	    title: 'Serre',
+	    loadComponent: () =>
+	        import('./pages/manor/greenhouse/greenhouse.component').then((m) => m.GreenhouseComponent),
+	},
+	{
+	    path: 'manoir/salle-a-manger',
+	    title: 'Salle à manger',
+	    loadComponent: () =>
+	        import('./pages/manor/dining-room/dining-room.component').then((m) => m.DiningRoomComponent),
 	},
 	{
 	    path: 'manoir/greenhouse',
-	    title: 'Serre',
-	    component: GreenhouseComponent,
+	    pathMatch: 'full',
+	    redirectTo: 'manoir/serre',
 	},
 	{
 	    path: 'manoir/dining-room',
-	    title: 'Salle à manger',
-	    component: DiningRoomComponent,
+	    pathMatch: 'full',
+	    redirectTo: 'manoir/salle-a-manger',
 	},
 	{
 	    path: '**',

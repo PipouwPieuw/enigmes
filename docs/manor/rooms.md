@@ -21,8 +21,8 @@ Clickable hotspots open each existing room. Hotspot overlays are still visually 
 | | |
 |--|--|
 | **Role** | Puzzle |
-| **Route** | `/manoir/dining-room` |
-| **Status** | Partial — mechanic present, solution check missing |
+| **Route** | `/manoir/salle-a-manger` |
+| **Status** | Partial — mechanic + provisional win check; final solution TBD |
 | **Clues** | TBD (where the correct setting is revealed is not documented yet) |
 
 **Intent:** Set the clock correctly:
@@ -31,7 +31,7 @@ Clickable hotspots open each existing room. Hotspot overlays are still visually 
 2. Position of the **symbols / zodiac hand**
 3. Correct **rotation of the zodiac panel**
 
-**In code:** Dual clock interaction (hands + rotating symbol ring) works. No target combination or win feedback yet.
+**In code:** Dual clock interaction (hands + rotating symbol ring) works. Provisional target `digits 3 / symbols 8 / ring 5` drives `isWin` (console only) — replace when design lands.
 
 ---
 
@@ -70,12 +70,12 @@ Clickable hotspots open each existing room. Hotspot overlays are still visually 
 |--|--|
 | **Role** | Puzzle |
 | **Route** | `/manoir/galerie` |
-| **Status** | Partial — swap mechanic present, correct order / win missing |
+| **Status** | Partial — swap mechanic + provisional win check; final order TBD |
 | **Clues** | TBD |
 
 **Intent:** Eight portraits must be arranged in the **correct order**.
 
-**In code:** Click-to-select then click-to-swap between portraits. No target order validation. A swap sound asset exists but is unused.
+**In code:** Click-to-select then click-to-swap between portraits. Provisional correct order `7…0` drives `isWin` (console only) — replace when design lands. A swap sound asset exists but is unused.
 
 ---
 
@@ -84,7 +84,7 @@ Clickable hotspots open each existing room. Hotspot overlays are still visually 
 | | |
 |--|--|
 | **Role** | Puzzle |
-| **Route** | `/manoir/greenhouse` |
+| **Route** | `/manoir/serre` |
 | **Status** | Stub |
 | **Clues** | **Bibliothèque** (planned) |
 
@@ -128,11 +128,11 @@ Clickable hotspots open each existing room. Hotspot overlays are still visually 
 | Room | Type | Route | Status |
 |------|------|-------|--------|
 | Carte | Hub | `manoir/carte` | Partial |
-| Salle à manger | Puzzle | `manoir/dining-room` | Partial |
+| Salle à manger | Puzzle | `manoir/salle-a-manger` | Partial |
 | Salle de musique | Puzzle | `manoir/salle-de-musique` | Partial |
 | Atelier d’Art | Clues → music | `manoir/atelier-d-arts` | Partial |
 | Galerie | Puzzle | `manoir/galerie` | Partial |
-| Serre | Puzzle | `manoir/greenhouse` | Stub |
+| Serre | Puzzle | `manoir/serre` | Stub |
 | Bibliothèque | Clues (multi) | — | Planned |
 | Bureau | TBD (maybe finale) | — | Planned |
 

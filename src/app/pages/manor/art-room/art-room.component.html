@@ -2,35 +2,45 @@
 <div class="app_art_room">
 	<div class="app_art_room__box">
 		<div class="app_art_room__book">
-			<button *ngIf="pageCount == 0" (click)="incrementPageCount()" aria-label="Ouvrir le livre d'art">
-				<img class="app_art_room__cover" src="{{ imgPath }}artbook_cover.png" alt=""/>
-			</button>
-			<div class="app_art_room__row" *ngIf="isOpen()">
-				<button class="app_art_room__nav app_art_room__nav--prev" (click)="decrementPageCount()" *ngIf="!magnified" aria-label="Page précédente">
-					<!-- <img class="app_art_room__arrow app_art_room__arrow--prev" src="{{ iconsPath }}next.svg"/> -->
+			@if (pageCount === 0) {
+				<button (click)="incrementPageCount()" aria-label="Ouvrir le livre d'art">
+					<img class="app_art_room__cover" src="{{ imgPath }}artbook_cover.png" alt=""/>
 				</button>
-				<button class="app_art_room__nav app_art_room__nav--next" (click)="incrementPageCount()" *ngIf="!magnified" aria-label="Page suivante">
-					<!-- <img class="app_art_room__arrow app_art_room__arrow--next" src="{{ iconsPath }}next.svg"/> -->
+			}
+			@if (isOpen()) {
+				<div class="app_art_room__row">
+					@if (!magnified) {
+						<button class="app_art_room__nav app_art_room__nav--prev" (click)="decrementPageCount()" aria-label="Page précédente">
+							<!-- <img class="app_art_room__arrow app_art_room__arrow--prev" src="{{ iconsPath }}next.svg"/> -->
+						</button>
+						<button class="app_art_room__nav app_art_room__nav--next" (click)="incrementPageCount()" aria-label="Page suivante">
+							<!-- <img class="app_art_room__arrow app_art_room__arrow--next" src="{{ iconsPath }}next.svg"/> -->
+						</button>
+					}
+					<img class="app_art_room__inside" src="{{ imgPath }}artbook_open.png" alt=""/>
+					<div class="app_art_room__half app_art_room__half--left">
+						<button class="app_art_room__magnify" (click)="magnifyImage(pageCount*2-1)" [attr.aria-label]="'Agrandir l\'illustration ' + (pageCount*2-1)">
+							<img class="app_art_room__picture" [src]="imgPath + '0' + (pageCount*2-1) + '_artbook.png'" alt=""/>
+						</button>
+					</div>
+					<div class="app_art_room__half app_art_room__half--right">
+						<button class="app_art_room__magnify" (click)="magnifyImage(pageCount*2)" [attr.aria-label]="'Agrandir l\'illustration ' + (pageCount*2)">
+							<img class="app_art_room__picture" [src]="imgPath + '0' + pageCount*2 + '_artbook.png'" alt=""/>
+						</button>
+					</div>
+				</div>
+			}
+			@if (pageCount > maxPages) {
+				<button (click)="decrementPageCount()" aria-label="Rouvrir le livre d'art">
+					<img class="app_art_room__cover app_art_room__cover--reverse" src="{{ imgPath }}artbook_cover.png" alt=""/>
 				</button>
-				<img class="app_art_room__inside" src="{{ imgPath }}artbook_open.png" alt=""/>
-				<div class="app_art_room__half app_art_room__half--left">
-					<button class="app_art_room__magnify" (click)="magnifyImage(pageCount*2-1)" [attr.aria-label]="'Agrandir l\'illustration ' + (pageCount*2-1)">
-						<img class="app_art_room__picture" [src]="imgPath + '0' + (pageCount*2-1) + '_artbook.png'" alt=""/>
-					</button>
-				</div>
-				<div class="app_art_room__half app_art_room__half--right">
-					<button class="app_art_room__magnify" (click)="magnifyImage(pageCount*2)" [attr.aria-label]="'Agrandir l\'illustration ' + (pageCount*2)">
-						<img class="app_art_room__picture" [src]="imgPath + '0' + pageCount*2 + '_artbook.png'" alt=""/>
-					</button>
-				</div>
-			</div>
-			<button *ngIf="pageCount > maxPages" (click)="decrementPageCount()" aria-label="Rouvrir le livre d'art">
-				<img class="app_art_room__cover app_art_room__cover--reverse" src="{{ imgPath }}artbook_cover.png" alt=""/>
-			</button>
+			}
 			<!-- Overlay -->
-			<button *ngIf="magnified" class="app_art_room__overlay" (click)="unmagnifyImage()" aria-label="Fermer l'illustration agrandie">
-				<img class="app_art_room__magnified" [src]="imgPath + '0' + magnifiedIndex + '_artbook.png'" [attr.alt]="'Illustration ' + magnifiedIndex"/>
-			</button>
+			@if (magnified) {
+				<button class="app_art_room__overlay" (click)="unmagnifyImage()" aria-label="Fermer l'illustration agrandie">
+					<img class="app_art_room__magnified" [src]="imgPath + '0' + magnifiedIndex + '_artbook.png'" [attr.alt]="'Illustration ' + magnifiedIndex"/>
+				</button>
+			}
 		</div>
 	</div>
 </div>

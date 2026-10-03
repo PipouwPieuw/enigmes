@@ -52,4 +52,4 @@ Every room page (except the map’s back link) uses:
 
 - Routes live under the `manoir/…` path prefix (see [Architecture](../architecture.md)).
 - There is **no shared Manor progress service** yet: solving a room does not unlock another or record completion globally.
-- Path naming is mixed French/English in the current router (`greenhouse`, `dining-room` vs `salle-de-musique`); prefer documenting rooms by their **French display names**.
+- Route paths use French segments (`serre`, `salle-a-manger`, `salle-de-musique`, …); document rooms by their **French display names**.

@@ -1,35 +1,34 @@
-import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener, input, signal, ViewChild } from '@angular/core';
 import { A11yModule } from '@angular/cdk/a11y';
 
 @Component({
     selector: 'app-modal',
     imports: [
-        CommonModule,
         A11yModule,
     ],
     templateUrl: './modal.component.html',
-    styleUrl: './modal.component.scss'
+    styleUrl: './modal.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalComponent {
-    @Input() text: string = '';
+    text = input('');
     @ViewChild('toggleButton') toggleButton?: ElementRef<HTMLButtonElement>;
-    isDisplayed: boolean = false;
+    readonly isDisplayed = signal(false);
     readonly descriptionId = 'app-modal-description';
 
     toggleModal() {
-        if (this.isDisplayed) {
+        if (this.isDisplayed()) {
             this.closeModal();
         } else {
-            this.isDisplayed = true;
+            this.isDisplayed.set(true);
         }
     }
 
     closeModal() {
-        if (!this.isDisplayed) {
+        if (!this.isDisplayed()) {
             return;
         }
-        this.isDisplayed = false;
+        this.isDisplayed.set(false);
         setTimeout(() => {
             this.toggleButton?.nativeElement.focus();
         });
@@ -37,7 +36,7 @@ export class ModalComponent {
 
     @HostListener('document:keydown.escape')
     onEscape() {
-        if (this.isDisplayed) {
+        if (this.isDisplayed()) {
             this.closeModal();
         }
     }

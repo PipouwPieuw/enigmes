@@ -1,24 +1,23 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { TopBarComponent } from '../../../components/ui/top-bar/top-bar.component';
 
 @Component({
     selector: 'app-art-room',
     imports: [
-        CommonModule,
         TopBarComponent
     ],
     templateUrl: './art-room.component.html',
-    styleUrl: './art-room.component.scss'
+    styleUrl: './art-room.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ArtRoomComponent {
-    imgPath:string = 'assets/images/manor/art-room/';
-    pageCount:number = 0;
-    maxPages:number = 4;
-    magnified:boolean = false;
-    magnifiedIndex:number = 1;
-    pageText:string = "Texte d'explication de la page";
+    imgPath = 'assets/images/manor/art-room/';
+    pageCount = 0;
+    maxPages = 4;
+    magnified = false;
+    magnifiedIndex = 1;
+    pageText = "Texte d'explication de la page";
 
     isOpen() {
         return this.pageCount > 0 && this.pageCount <= this.maxPages;

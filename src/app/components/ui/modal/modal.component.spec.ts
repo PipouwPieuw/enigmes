@@ -20,4 +20,27 @@ describe('ModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('toggleModal opens and closes the modal', () => {
+    expect(component.isDisplayed()).toBeFalse();
+
+    component.toggleModal();
+    expect(component.isDisplayed()).toBeTrue();
+
+    component.toggleModal();
+    expect(component.isDisplayed()).toBeFalse();
+  });
+
+  it('Escape closes an open modal', () => {
+    component.toggleModal();
+    expect(component.isDisplayed()).toBeTrue();
+
+    component.onEscape();
+    expect(component.isDisplayed()).toBeFalse();
+  });
+
+  it('Escape does nothing when the modal is already closed', () => {
+    component.onEscape();
+    expect(component.isDisplayed()).toBeFalse();
+  });
 });

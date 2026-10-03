@@ -1,13 +1,21 @@
 <app-top-bar [backLink]="'/manoir/carte'" [pageText]="pageText"></app-top-bar>
 <div class="app_gallery">
 	<ul class="app_gallery__bolts">
-		<li *ngFor="let portrait of portraits" class="app_gallery__bolt"></li>
+		@for (portrait of portraits(); track portrait) {
+			<li class="app_gallery__bolt"></li>
+		}
 	</ul>
 	<ul class="app_gallery__portraits">
-		<li *ngFor="let portrait of portraits; let i = index" class="app_gallery__portrait" [class]="'portrait_' + portrait" [ngClass]="{'app_gallery__portrait--selected': selectedPortrait == portrait}">
-			<button class="app_gallery__portrait_inner" [class]="'portrait_inner_' + portrait" (click)="selectPortrait(portrait)">
-				<img [src]="imgPath + portrait + '.png'" [alt]="'Portrait ' + portrait">
-			</button>
-		</li>
+		@for (portrait of portraits(); track $index) {
+			<li
+				class="app_gallery__portrait"
+				[class]="'portrait_' + portrait"
+				[class.app_gallery__portrait--selected]="selectedPortrait() === portrait"
+			>
+				<button class="app_gallery__portrait_inner" [class]="'portrait_inner_' + portrait" (click)="selectPortrait(portrait)">
+					<img [src]="imgPath + portrait + '.png'" [alt]="'Portrait ' + portrait">
+				</button>
+			</li>
+		}
 	</ul>
 </div>

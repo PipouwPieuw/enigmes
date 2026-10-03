@@ -2,7 +2,7 @@
 
 Snapshot of the front-end stack and code quality. Product/design status lives in [game design](./game-design.md) and [rooms](./manor/rooms.md); actionable follow-ups are in [TODO](./TODO.md) §8.
 
-**Verdict:** Healthy **Angular 19 shell** (standalone, strict TypeScript, application builder), but much of the *application code* still follows **Angular 14–16 idioms**. This is a modernization pass, not a rewrite.
+**Verdict:** Healthy **Angular 19 shell** (standalone, strict TypeScript, application builder). Idioms catch-up (§8.2) is largely done; remaining gaps are tooling, lazy routes, and fuller signal adoption (§8.3).
 
 ---
 
@@ -13,11 +13,11 @@ Snapshot of the front-end stack and code quality. Product/design status lives in
 | Angular | Good | `@angular/*` **19.2.x**, application builder, `bootstrapApplication` |
 | TypeScript | Good | **5.8**, `strict` + `strictTemplates` |
 | Component model | Good | Standalone only; no NgModules |
-| Framework idioms | Outdated | Still `*ngIf`/`*ngFor`, `@Input()`, no signals, no OnPush, no lazy routes |
-| Dependencies | Bloated | Unused jQuery stack, Forms, Animations; CDK unused |
-| Tests | Weak | Scaffold `should create` only; AppComponent spec stale; Karma styles path wrong |
+| Framework idioms | Good | `@if`/`@for`, `input()`, OnPush; subset of puzzle state still mutable / not fully signal-based |
+| Dependencies | Good | jQuery / Forms / Animations / direct `sass` removed; CDK kept for modal a11y |
+| Tests | Weak | Scaffold `should create` only; Karma repaired |
 | Lint / CI | Missing | No ESLint, Prettier, or CI config in repo |
-| Deploy | Fragile | Absolute `/assets` + `href`; `buildprod` uses absolute `/docs` |
+| Deploy | Good | Relative assets + `routerLink` + `buildprod` → `dist/rutabaga`; `public/` favicon wired; French routes + redirects |
 
 ---
 
@@ -34,42 +34,27 @@ Snapshot of the front-end stack and code quality. Product/design status lives in
 
 ## Findings
 
-### 1. Angular patterns lag the framework version
+### 1. Angular patterns (mostly modernized)
 
-| Current | Prefer |
-|---------|--------|
-| `*ngIf` / `*ngFor` / `*ngClass` | `@if` / `@for` (with `track`) / `[class.]` |
-| `@Input()` | `input()` (and `output()` when needed) |
-| Blanket `CommonModule` | Drop after control-flow migration |
-| Default change detection | `OnPush` once inputs/signals settle |
-| Eager route imports | `loadComponent` lazy routes as rooms grow |
-| Mutable fields only | `signal` / `computed` for puzzle state |
-
-Templates still allocate every CD cycle in places (`[].constructor(n)` in the music room; `keyvalue` on `object` maps).
+Control flow (`@if` / `@for`), `input()` on TopBar/Modal, OnPush on UI + rooms, and typed room/chord/clock arrays are in place. Still ahead for §8.3: lazy `loadComponent`, broader `signal` / `computed` for puzzle state.
 
 ### 2. TypeScript quality
 
-- Loose `: object` for room/chord/clock data → forces `['key']` and `keyof object`
-- `any[]` (dining-room indexes), widespread `var`, `==` instead of `===`
-- Real bug: music room `this.playingSound == 0` (comparison, never clears state)
-- Broken barrel: `pages/manor/index.ts` exports a non-existent module
-- Dead imports (e.g. unused `KeyValue` type imports)
+- Room/chord/clock data typed as arrays/interfaces (was `: object` + `keyvalue`)
+- Widespread `var` / `==` remain in older puzzle logic
+- Music-room `playingSound` is a `signal` (assignment bug fixed earlier)
+- Broken manor barrel removed
 
 ### 3. Routing & deploy
 
-- In-app links use absolute `href` (`/manoir/...`) → full reloads; ignore `base-href`
-- Asset URLs hardcode `/assets/...` in TS and SCSS → break under `/rutabaga/`
-- `buildprod`: `--output-path /docs` is **filesystem-absolute** (risky on Windows); should be relative `docs` or `./docs`
-- No `''` redirect or `**` wildcard
-- Mixed French/English path segments
-- `index.html` has `lang="en"` while the product is French
-- Favicon / `public` not clearly wired into build `assets` (build only copies `src/assets`)
+- In-app navigation uses `routerLink`; assets are base-href safe; `buildprod` → `dist/rutabaga`
+- `''` redirect + `**` wildcard present
+- French path segments (`serre`, `salle-a-manger`) with redirects from old English URLs
+- `index.html` uses `lang="fr"`; `public/` favicon copied into the build
 
 ### 4. Accessibility
 
-Zero `aria-*`, `role`, `alt`, or `.sr_only` usage under `src/app` despite mandatory rules in `.cursor/rules/accessibility.mdc`.
-
-Critical gaps: modal is not a dialog (no focus trap / Escape / `aria-modal`); icon-only controls rely on `title`; map hotspots and many puzzle buttons lack accessible names.
+Modal dialog a11y (CDK focus trap, Escape, `role="dialog"`) and baseline `aria-label` / `alt` landed in §8.1. Remaining room-level a11y (gallery selection state, map polish, etc.) is tracked in product TODO §4.
 
 ### 5. Dependencies
 
@@ -77,10 +62,10 @@ Critical gaps: modal is not a dialog (no focus trap / Escape / `aria-modal`); ic
 |---------|---------|
 | Core Angular (common, router, platform-*, etc.) | Keep |
 | `rxjs`, `zone.js`, `tslib` | Keep |
-| `jquery`, `jquery-ui`, `jqueryui`, `@types/jquery*` | **Remove** (unused; `@types/jqueryui` wrongly in dependencies) |
-| `@angular/forms`, `@angular/animations` | **Remove** until actually used |
-| `@angular/cdk` | **Keep only if** used soon for dialog / a11y / drag-drop (Serre); else remove |
-| Direct `sass` dependency | Optional remove (CLI already provides Sass) |
+| `jquery`, `jquery-ui`, `jqueryui`, `@types/jquery*` | Removed |
+| `@angular/forms`, `@angular/animations` | Removed until needed |
+| `@angular/cdk` | Kept (modal a11y; planned Serre drag-drop) |
+| Direct `sass` dependency | Removed (CLI Sass) |
 
 No urgent major-version upgrade required; finish idioms on 19.x before jumping to 20+.
 
@@ -94,8 +79,8 @@ No urgent major-version upgrade required; finish idioms on 19.x before jumping t
 
 ### 7. Tests & tooling
 
-- Specs are boilerplate; `app.component.spec.ts` still expects a non-existent “Hello, enigmes” `h1`
-- Karma config points at missing `src/styles.css` and does not include `src/assets`
+- Specs are mostly boilerplate `should create`
+- Karma styles/assets repaired; AppComponent spec updated in §8.1
 - No `ng lint` / ESLint / Prettier / CI pipeline
 
 ### 8. Performance (acceptable at current scale)

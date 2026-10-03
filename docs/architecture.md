@@ -43,14 +43,14 @@ Routes are defined in `src/app/app.routes.ts`. All current routes belong to the 
 | `manoir/atelier-d-arts` | Atelier d'Art | `ArtRoomComponent` |
 | `manoir/salle-de-musique` | Salle de musique | `MusicRoomComponent` |
 | `manoir/galerie` | Galerie | `GalleryComponent` |
-| `manoir/greenhouse` | Serre | `GreenhouseComponent` |
-| `manoir/dining-room` | Salle à manger | `DiningRoomComponent` |
+| `manoir/serre` | Serre | `GreenhouseComponent` |
+| `manoir/salle-a-manger` | Salle à manger | `DiningRoomComponent` |
 
 Notes:
 
-- No default `''` redirect and no wildcard route yet.
-- Navigation often uses plain `href` rather than `routerLink`.
-- Path segments are inconsistently French vs English; prefer French **titles** in UI and docs.
+- Default `''` → `manoir/carte`; unknown paths redirect via `**`.
+- Old English paths (`manoir/greenhouse`, `manoir/dining-room`) redirect to the French routes.
+- In-app navigation uses `routerLink`.
 - Planned rooms (Bibliothèque, Bureau) have no routes yet.
 - Future standalone game parts will likely use their own path prefixes (to be decided).
 

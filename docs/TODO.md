@@ -46,8 +46,8 @@ These should be answered before some implementation work can finish properly.
 - [ ] Accessible names on prev/next / magnify controls; meaningful `alt` on artworks
 
 ### Galerie
-- [ ] Define and encode the **correct portrait order**
-- [ ] Add win detection + player feedback
+- [ ] Define and encode the **correct portrait order** (provisional reverse order `7…0` in code — confirm/replace when design lands)
+- [ ] Add win detection + player feedback (`isWin` + console log exist; need player-facing UX)
 - [ ] Play `switch.wav` (or final SFX) on swap
 - [ ] Remove debug selection styling if still placeholder blue
 - [ ] Wire clue source once designed
@@ -56,8 +56,8 @@ These should be answered before some implementation work can finish properly.
 - [ ] Accessible selection state (`aria-pressed` / live feedback)
 
 ### Salle à manger
-- [ ] Define the **correct clock solution** (digits hand + symbols hand + zodiac rotation)
-- [ ] Add validation + player feedback
+- [ ] Define the **correct clock solution** (digits hand + symbols hand + zodiac rotation; provisional `3 / 8 / 5` in code — confirm/replace when design lands)
+- [ ] Add validation + player feedback (`isWin` + console log exist; need player-facing UX)
 - [ ] Wire clue source once designed
 - [ ] Replace placeholder info text
 - [ ] Report completion to Manor progress (when it exists)
@@ -98,11 +98,11 @@ These should be answered before some implementation work can finish properly.
 - [ ] Optional: persist progress locally
 - [ ] Optional: lock Bureau (or other rooms) until prerequisites are met
 - [ ] Manor-level **completion** flow once §0 is decided (message, unlock, transition…)
-- [ ] Consistent French route paths (`greenhouse` → `serre`, `dining-room` → `salle-a-manger`, etc.) + redirects from old URLs if needed
-- [ ] Default app entry: redirect `/` → Manor carte or future game hub
-- [ ] Wildcard route for unknown URLs
+- [x] Consistent French route paths (`greenhouse` → `serre`, `dining-room` → `salle-a-manger`, etc.) + redirects from old URLs if needed
+- [x] Default app entry: redirect `/` → Manor carte or future game hub
+- [x] Wildcard route for unknown URLs
 - [ ] Remove temporary debug nav list from `app.component` when no longer needed
-- [ ] Replace raw `href` with `routerLink` for all in-app navigation (shell, top-bar, map)
+- [x] Replace raw `href` with `routerLink` for all in-app navigation (shell, top-bar, map)
 
 ---
 
@@ -110,7 +110,7 @@ These should be answered before some implementation work can finish properly.
 
 - [ ] Real French explanation texts for every existing page (`pageText` / modal)
 - [ ] Accessibility pass (ARIA on icon controls, modal dialog pattern, image `alt`, keyboard) — see `.cursor/rules/accessibility.mdc`
-- [ ] Set `lang="fr"` on `index.html`
+- [x] Set `lang="fr"` on `index.html`
 - [ ] Strip remaining debug colours / WIP styles across rooms
 - [ ] Align BEM naming outliers (e.g. greenhouse, music-room organ classes) with `app_` conventions
 - [ ] Expand or apply design tokens instead of one-off hex where practical
@@ -121,16 +121,16 @@ These should be answered before some implementation work can finish properly.
 
 ## 5. Engineering hygiene
 
-- [ ] Fix or remove broken barrel `src/app/pages/manor/index.ts`
-- [ ] Remove unused jQuery stack (`jquery`, `jquery-ui`, `jqueryui`, `@types/jquery`, `@types/jqueryui`)
-- [ ] Remove unused `@angular/forms` and `@angular/animations` until needed
-- [ ] Keep `@angular/cdk` only if used for modal a11y / Serre drag-drop; otherwise remove
+- [x] Fix or remove broken barrel `src/app/pages/manor/index.ts`
+- [x] Remove unused jQuery stack (`jquery`, `jquery-ui`, `jqueryui`, `@types/jquery`, `@types/jqueryui`)
+- [x] Remove unused `@angular/forms` and `@angular/animations` until needed
+- [x] Keep `@angular/cdk` only if used for modal a11y / Serre drag-drop; otherwise remove
 - [x] Fix `buildprod`: relative output path (`dist/rutabaga`, not `/docs` or `docs/`); verify `base-href /rutabaga/`
 - [x] Fix absolute `/assets/...` in TS and SCSS so subpath deploy works
-- [ ] Wire `public/` (favicon) into the build if required by the host setup
+- [x] Wire `public/` (favicon) into the build if required by the host setup
 - [ ] Add SPA fallback for deep links on the static host
 - [x] Fix Karma test config (`styles.scss`, include `src/assets`); repair stale `app.component.spec.ts`
-- [ ] Typed models for room/puzzle data instead of loose `object` where we touch that code
+- [x] Typed models for room/puzzle data instead of loose `object` where we touch that code
 - [ ] Prefer `const`/`let` and `===`; remove debug `console.log` from puzzle flows
 
 ---
@@ -142,7 +142,7 @@ These should be answered before some implementation work can finish properly.
 - [ ] Document other standalone parts when named
 - [ ] Optional: spoiler appendix (solutions) separate from public design docs
 - [ ] Keep this TODO and [technical-audit.md](./technical-audit.md) checked / refreshed as work lands
-- [ ] Update `.cursor/rules/angular-conventions.mdc` when modern patterns are adopted (`@if`, `input()`, `routerLink`, relative assets)
+- [x] Update `.cursor/rules/angular-conventions.mdc` when modern patterns are adopted (`@if`, `input()`, `routerLink`, relative assets)
 
 ---
 
@@ -158,7 +158,7 @@ These should be answered before some implementation work can finish properly.
 ## 8. Technical modernization
 
 Full write-up: [technical-audit.md](./technical-audit.md).  
-Stack is already on **Angular 19**; the gap is **idioms, hygiene, and deploy safety** — not an emergency framework upgrade.
+Stack is already on **Angular 19**; §8.1 / §8.2 are done. Remaining work is scale/tooling (§8.3), not a framework upgrade.
 
 ### 8.1 Must (do soon — correctness / deploy / a11y baseline)
 
@@ -174,42 +174,40 @@ Stack is already on **Angular 19**; the gap is **idioms, hygiene, and deploy saf
 
 ### 8.2 Should (Angular 19 idioms + cleanup)
 
-- [ ] Migrate templates to `@if` / `@for` (with `track`); remove unused `CommonModule`
-- [ ] Migrate `@Input()` → `input()` on TopBar / Modal (then rooms as touched)
-- [ ] Introduce `ChangeDetectionStrategy.OnPush` on UI + room components after input/signal cleanup
-- [ ] Replace `: object` + `keyvalue` with typed arrays / `Record<>` models
-- [ ] Replace template `[].constructor(n)` with stable readonly arrays
-- [ ] Dependency diet: remove jQuery stack; remove unused Forms/Animations; CDK keep-or-cut
-- [ ] Optional: drop direct `sass` dependency if CLI Sass is enough
-- [ ] Set document language to French; normalize route path language
-- [ ] Ensure favicon ships in production build
-- [ ] Align Cursor Angular conventions with adopted modern patterns
+- [x] Migrate templates to `@if` / `@for` (with `track`); remove unused `CommonModule`
+- [x] Migrate `@Input()` → `input()` on TopBar / Modal (then rooms as touched)
+- [x] Introduce `ChangeDetectionStrategy.OnPush` on UI + room components after input/signal cleanup
+- [x] Replace `: object` + `keyvalue` with typed arrays / `Record<>` models
+- [x] Replace template `[].constructor(n)` with stable readonly arrays
+- [x] Dependency diet: remove jQuery stack; remove unused Forms/Animations; CDK keep-or-cut
+- [x] Optional: drop direct `sass` dependency if CLI Sass is enough
+- [x] Set document language to French; normalize route path language
+- [x] Ensure favicon ships in production build
+- [x] Align Cursor Angular conventions with adopted modern patterns
 
 ### 8.3 Nice (scale / tooling)
 
-- [ ] Lazy-load Manor rooms with `loadComponent`
-- [ ] Adopt `signal` / `computed` for puzzle state (keys, chords, clock, gallery selection)
-- [ ] SCSS cleanup: delete empty mixin stubs; trim obsolete vendor prefixes; use color tokens
-- [ ] Load Outfit via `<link>` (or self-host) instead of SCSS `@import url(...)`
-- [ ] Real unit tests for chord matching, gallery order, clock validation, modal toggle
-- [ ] Add `angular-eslint` (+ optional Prettier) and an `npm run lint` script
-- [ ] CI pipeline: install → lint → test → build
+- [x] Lazy-load Manor rooms with `loadComponent`
+- [x] Adopt `signal` / `computed` for puzzle state (keys, chords, clock, gallery selection)
+- [x] SCSS cleanup: delete empty mixin stubs; trim obsolete vendor prefixes; use color tokens
+- [x] Load Outfit via `<link>` (or self-host) instead of SCSS `@import url(...)`
+- [x] Real unit tests for chord matching, gallery order, clock validation, modal toggle
+- [x] Add `angular-eslint` (+ optional Prettier) and an `npm run lint` script
+- [x] CI pipeline: install → lint → test → build
 - [ ] Later: evaluate Vitest; evaluate zoneless after signals are in place
-- [ ] Stay on Angular 19.x patches; plan 20+ only after control-flow / `input()` migration
+- [x] Stay on Angular 19.x patches; plan 20+ only after control-flow / `input()` migration
 
 ---
 
 ## Suggested priority (near term)
 
-1. **Tech musts:** `routerLink` + asset/base-href fixes + `buildprod` + music bug + modal a11y  
-2. **Design:** Manor win + clue locations for clock / gallery / library books  
-3. **Playable:** Music win UX → Gallery order+win → Dining validation  
-4. **New content:** Bibliothèque + Serre (clue ↔ puzzle pair; CDK not jQuery)  
-5. **Systems:** progress service + map polish + remove debug UI  
-6. **Modernization shoulds:** `@if`/`@for`, typed models, dep cleanup, OnPush  
-7. **Bureau** once its role is fixed  
-8. **Tooling nice-to-haves:** ESLint, CI, real puzzle tests  
+1. **Design:** Manor win + clue locations for clock / gallery / library books  
+2. **Playable:** Music win UX → Gallery order+win → Dining validation  
+3. **New content:** Bibliothèque + Serre (clue ↔ puzzle pair; CDK not jQuery)  
+4. **Systems:** progress service + map polish + remove debug UI  
+5. **Bureau** once its role is fixed  
+6. **Tooling later:** Vitest / zoneless evaluation (§8.3) when useful  
 
 ---
 
-*Last aligned with docs + technical audit: Angular 19 shell, early Manor prototype, outdated app idioms, unused jQuery, fragile subpath deploy.*
+*Last aligned with docs + technical audit: Angular 19 idioms (§8.2) and most §8.3 tooling landed; Manor content/systems and Vitest/zoneless evaluation still open.*

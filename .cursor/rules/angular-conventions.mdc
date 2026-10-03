@@ -12,7 +12,11 @@ alwaysApply: false
 - Pages: `src/app/pages/manor/{room}/`; shared UI: `src/app/components/ui/`.
 - Import order: Angular core → Angular common/forms/router → local components.
 - Room pages include `TopBarComponent` with `backLink` and `pageText` where applicable.
-- Route `title` in French; paths match existing `app.routes.ts` patterns.
-- Prefer typed models over loose `object` for new code; keep numeric-key objects only where already established.
+- Route `title` in French; paths match existing `app.routes.ts` patterns (French segments).
+- Prefer `@if` / `@for` (with `track`); do not introduce new `*ngIf` / `*ngFor`.
+- Prefer `input()` / `output()` over `@Input()` / `@Output()`.
+- Prefer `ChangeDetectionStrategy.OnPush` on new and touched components.
+- Prefer typed arrays / interfaces over loose `object` and the `keyvalue` pipe.
+- Prefer stable class-level arrays over allocating in templates (`[].constructor(n)`).
 - Assets: `assets/images/...`, `assets/sound/...` (no leading `/` — base-href safe).
 - In-app navigation: `routerLink` / `[routerLink]`, never absolute `href` to app routes.

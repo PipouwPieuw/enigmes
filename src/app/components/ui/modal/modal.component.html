@@ -6,25 +6,25 @@
 	title="Informations de la page"
 	aria-label="Informations de la page"
 	aria-haspopup="dialog"
-	[attr.aria-expanded]="isDisplayed"
+	[attr.aria-expanded]="isDisplayed()"
 ></button>
-<button
-	*ngIf="isDisplayed"
-	type="button"
-	(click)="closeModal()"
-	class="app_modal__overlay"
-	aria-label="Fermer"
-	tabindex="-1"
-></button>
-<div
-	*ngIf="isDisplayed"
-	class="app_modal__box"
-	role="dialog"
-	aria-modal="true"
-	[attr.aria-describedby]="descriptionId"
-	tabindex="-1"
-	cdkTrapFocus
-	[cdkTrapFocusAutoCapture]="true"
->
-	<span [id]="descriptionId">{{ text }}</span>
-</div>
+@if (isDisplayed()) {
+	<button
+		type="button"
+		(click)="closeModal()"
+		class="app_modal__overlay"
+		aria-label="Fermer"
+		tabindex="-1"
+	></button>
+	<div
+		class="app_modal__box"
+		role="dialog"
+		aria-modal="true"
+		[attr.aria-describedby]="descriptionId"
+		tabindex="-1"
+		cdkTrapFocus
+		[cdkTrapFocusAutoCapture]="true"
+	>
+		<span [id]="descriptionId">{{ text() }}</span>
+	</div>
+}

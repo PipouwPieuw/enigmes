@@ -2,21 +2,33 @@
 <div class="app_music_room">
 	<div class="app_music_room__organ">
 		<div class="app_music_room__chords">
-			<div *ngFor="let chord of [].constructor(chordsAmount); let i=index" class="app_music_room__chord" [ngClass]="'app_music_room__chord--' + (i)">
-				<div class="organ_chord" [ngClass]="{'organ_chord--active': activeChords.has(i)}">
-					<span class="organ_chord__icon webfont" [ngClass]="'webfont-' + (icons[i])"></span>
+			@for (chord of chords; track chord.icon; let i = $index) {
+				<div class="app_music_room__chord" [class]="'app_music_room__chord--' + i">
+					<div class="organ_chord" [class.organ_chord--active]="activeChords().has(i)">
+						<span class="organ_chord__icon webfont" [class]="'webfont-' + chord.icon"></span>
+					</div>
 				</div>
-			</div>
+			}
 		</div>
 		<div class="app_music_room__keyboard">
-			<div *ngFor="let sound of [].constructor(soundsAmount); let i=index" class="app_music_room__key">
-				<button class="organ_key" [ngClass]="{'organ_key--active': activeKeys.has(i+1)}" (click)="keyPressed(i+1)">{{ i+1 }}</button>
-			</div>
+			@for (keyIndex of keyIndexes; track keyIndex) {
+				<div class="app_music_room__key">
+					<button class="organ_key" [class.organ_key--active]="activeKeys().has(keyIndex)" (click)="keyPressed(keyIndex)">{{ keyIndex }}</button>
+				</div>
+			}
 		</div>
 		<div class="app_music_room__keyboard_front">
-			<div *ngFor="let sound of [].constructor(soundsAmount); let i=index" class="app_music_room__key">
-				<button class="organ_key_front" [ngClass]="{'organ_key_front--active': activeKeys.has(i+1)}" (click)="keyPressed(i+1)"></button>
-			</div>
+			@for (keyIndex of keyIndexes; track keyIndex) {
+				<div class="app_music_room__key">
+					<button
+						type="button"
+						class="organ_key_front"
+						[class.organ_key_front--active]="activeKeys().has(keyIndex)"
+						[attr.aria-label]="'Touche ' + keyIndex"
+						(click)="keyPressed(keyIndex)"
+					></button>
+				</div>
+			}
 		</div>
 	</div>
 </div>

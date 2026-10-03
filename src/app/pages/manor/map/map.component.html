@@ -3,14 +3,15 @@
 	<div class="app_map__container">
 		<div class="app_map__box">
 			<img class="app_map__picture" [src]="imgPath + 'map.png'" alt="Carte du manoir"/>
-			<a
-				class="app_map__room"
-				*ngFor="let room of rooms|keyvalue"
-				[routerLink]="room.value['route']"
-				[title]="room.value['name']"
-				[attr.aria-label]="room.value['name']"
-				[style]="'top:' + room.value['posY'] + '; left:' + room.value['posX'] + '; width:' + room.value['width'] + '; height:' + room.value['height'] + ';' "
-			></a>
+			@for (room of rooms; track room.route) {
+				<a
+					class="app_map__room"
+					[routerLink]="room.route"
+					[title]="room.name"
+					[attr.aria-label]="room.name"
+					[style]="'top:' + room.posY + '; left:' + room.posX + '; width:' + room.width + '; height:' + room.height + ';' "
+				></a>
+			}
 		</div>
 	</div>
 </div>
