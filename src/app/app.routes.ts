@@ -31,10 +31,10 @@ export const routes: Routes = [
 	        import('./pages/manor/gallery/gallery.component').then((m) => m.GalleryComponent),
 	},
 	{
-	    path: 'manoir/serre',
-	    title: 'Serre',
+	    path: 'manoir/veranda',
+	    title: 'Véranda',
 	    loadComponent: () =>
-	        import('./pages/manor/greenhouse/greenhouse.component').then((m) => m.GreenhouseComponent),
+	        import('./pages/manor/veranda/veranda.component').then((m) => m.VerandaComponent),
 	},
 	{
 	    path: 'manoir/salle-a-manger',
@@ -43,9 +43,14 @@ export const routes: Routes = [
 	        import('./pages/manor/dining-room/dining-room.component').then((m) => m.DiningRoomComponent),
 	},
 	{
+	    path: 'manoir/serre',
+	    pathMatch: 'full',
+	    redirectTo: 'manoir/veranda',
+	},
+	{
 	    path: 'manoir/greenhouse',
 	    pathMatch: 'full',
-	    redirectTo: 'manoir/serre',
+	    redirectTo: 'manoir/veranda',
 	},
 	{
 	    path: 'manoir/dining-room',

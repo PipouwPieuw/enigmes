@@ -2,6 +2,8 @@
 
 Design intent and implementation status per room. French name is canonical; English is for orientation.
 
+Murder facts revealed by puzzles: **Who** (Galerie), **What** (Cuisine), **Where** (Salle de musique), **When** (Salle à manger). Validated together in the **Bureau**. See [overview](./overview.md).
+
 ---
 
 ## Carte (Map)
@@ -14,39 +16,24 @@ Design intent and implementation status per room. French name is canonical; Engl
 
 Clickable hotspots open each existing room. Hotspot overlays are still visually in a debug state (visible hit areas). No puzzle.
 
----
-
-## Salle à manger (Dining room)
-
-| | |
-|--|--|
-| **Role** | Puzzle |
-| **Route** | `/manoir/salle-a-manger` |
-| **Status** | Partial — mechanic + provisional win check; final solution TBD |
-| **Clues** | TBD (where the correct setting is revealed is not documented yet) |
-
-**Intent:** Set the clock correctly:
-
-1. Position of the **digits hand**
-2. Position of the **symbols / zodiac hand**
-3. Correct **rotation of the zodiac panel**
-
-**In code:** Dual clock interaction (hands + rotating symbol ring) works. Provisional target `digits 3 / symbols 8 / ring 5` drives `isWin` (console only) — replace when design lands.
+**Shared chrome (all rooms):** top bar with **back to map** and **info** (modal for the current page).
 
 ---
 
-## Salle de musique (Music room)
+## Galerie (Gallery)
 
 | | |
 |--|--|
-| **Role** | Puzzle |
-| **Route** | `/manoir/salle-de-musique` |
-| **Status** | Partial — puzzle playable; win is only logged in the console |
-| **Clues** | **Atelier d’Art** (art book) |
+| **Role** | Puzzle → reveals **Who** (the killer) |
+| **Route** | `/manoir/galerie` |
+| **Status** | Partial — swap mechanic + provisional win check; final order TBD |
+| **Clues** | **Bibliothèque** |
 
-**Intent:** Organ/piano with keys that each play a sound. Find the correct **chords** (3 keys each). When a chord is found, the matching **icon above** lights up.
+**Intent:** Eight portraits on a wall. The player rearranges them into the correct positions by **swapping portraits**. Clues for the correct arrangement are in the Library.
 
-**In code:** 17 keys, audio, 8 chords, icon feedback. Completing all chords logs `WIN` — no player-facing reward or Manor progress yet.
+**On solve:** The killer’s portrait is **highlighted** among the eight (exact highlight treatment TBD when implementing). That is the **Who** answer for the Bureau.
+
+**In code:** Drag-and-drop swap is implemented; **click-to-select then click-to-swap** remains as a fallback. Provisional correct order `7…0` drives `isWin` (console only) — replace when design lands. A swap sound asset exists but is unused.
 
 ---
 
@@ -58,43 +45,99 @@ Clickable hotspots open each existing room. Hotspot overlays are still visually 
 | **Route** | `/manoir/atelier-d-arts` |
 | **Status** | Partial — browsing/magnify UX present; no local puzzle |
 
-**Intent:** An art book whose pictures contain clues for the Music Room. Each picture shows **3 items**; each item corresponds to a piano key sound. **One picture = one chord** to find in the Music Room.
+**Intent:** An art book whose pictures show locations with many items. Each picture encodes **3 items** that match organ key sounds — **one picture = one chord** for the Salle de musique. Reading UX should match the Library books (open, browse, magnify).
 
-**In code:** Open book, flip spreads, magnify artworks. No separate “solve” state — by design this room is for inspection, not a local win.
-
----
-
-## Galerie (Gallery)
-
-| | |
-|--|--|
-| **Role** | Puzzle |
-| **Route** | `/manoir/galerie` |
-| **Status** | Partial — swap mechanic + provisional win check; final order TBD |
-| **Clues** | TBD |
-
-**Intent:** Eight portraits must be arranged in the **correct order**.
-
-**In code:** Click-to-select then click-to-swap between portraits. Provisional correct order `7…0` drives `isWin` (console only) — replace when design lands. A swap sound asset exists but is unused.
+**In code:** Open book, flip spreads, magnify artworks. No local “solve” state — by design this room is for inspection only.
 
 ---
 
-## Serre (Greenhouse)
+## Véranda (Veranda)
 
 | | |
 |--|--|
-| **Role** | Puzzle |
-| **Route** | `/manoir/serre` |
+| **Role** | Puzzle → unlocks **clues for the Salle à manger** |
+| **Route** | `/manoir/veranda` (redirects from `serre` / `greenhouse`) |
 | **Status** | Stub |
-| **Clues** | **Bibliothèque** (planned) |
+| **Clues** | **Bibliothèque** |
+| **Former name** | Serre / Greenhouse |
 
-**Intent (design only):**
+**Intent:**
 
-- Place different **plants** on set positions.
-- More plants than slots — the player must **identify** the right plants from **text descriptions**.
-- Descriptions / identification clues live in the **Library**.
+- Empty plant slots, each with a **tag showing a plant name**.
+- **More plants than slots** — the player must identify the right plants from Library texts.
+- Identification / placement clues live in the **Bibliothèque**.
 
-**In code:** Placeholder page (`greenhouse works!`). Assets on disk are not wired yet.
+**On solve:** Show **clues needed to solve the dining-room clock** (presentation TBD when implementing).
+
+**In code:** Placeholder page (`VerandaComponent`). Assets under `assets/images/manor/veranda/` are not wired yet. Prefer Angular CDK drag-drop or click-to-place — not jQuery.
+
+---
+
+## Salle de musique (Music room)
+
+| | |
+|--|--|
+| **Role** | Puzzle → reveals **Where** (crime location) |
+| **Route** | `/manoir/salle-de-musique` |
+| **Status** | Partial — puzzle playable; win is only logged in the console |
+| **Clues** | **Atelier d’Art** (art book) |
+
+**Intent:** An organ; each key plays a different sound. Sounds correspond to items visible in the Atelier d’Art pictures. Each picture contains **3 matching items** → play a **chord of 3 keys** per picture. A correct chord lights the corresponding **logo on the organ frame**.
+
+**On solve:** The organ shows / reveals the **location where the crime took place** (**Where** for the Bureau). Presentation TBD.
+
+**In code:** Keys, audio, chords, icon feedback. Completing all chords logs `WIN` — no player-facing murder reveal or Manor progress yet.
+
+---
+
+## Salle à manger (Dining room)
+
+| | |
+|--|--|
+| **Role** | Puzzle → reveals **When** (hour of the crime) |
+| **Route** | `/manoir/salle-a-manger` |
+| **Status** | Partial — mechanic + provisional single-combination win; design is **3 combinations** |
+| **Clues** | **Véranda** (after that puzzle is solved) |
+
+**Intent:** A clock with **two hands**, plus a disc of the **12 astrological signs**. A **frame** around the dial (to be added — currently dial only) will hold **indicators**. The player sets:
+
+1. Position of hand A  
+2. Position of hand B  
+3. Rotation / position of the **zodiac disc**
+
+into each of **3 valid combinations**. Each valid combination lights an **indicator on the clock frame**. After all three are entered, the clock reveals the **hour of the crime** (**When**). Exact reveal treatment TBD when implementing.
+
+**In code:** Dual clock interaction (hands + rotating symbol ring) works. Provisional single target `digits 3 / symbols 8 / ring 5` drives `isWin` (console only) — replace with 3-combination validation + frame indicators when art/numbers land.
+
+---
+
+## Salle de divination (Divination room)
+
+| | |
+|--|--|
+| **Role** | Puzzle → unlocks **clues for the Cuisine** |
+| **Route** | *none yet* (suggested: `/manoir/salle-de-divination`) |
+| **Status** | Planned |
+| **Clues** | **Bibliothèque** |
+
+**Intent:** A set of **tarot cards**. The player clicks them in the **correct order**. Clues for the order are in the Library.
+
+**On solve:** Cards **flip** and show clues needed to solve the **Cuisine** puzzle.
+
+---
+
+## Cuisine (Kitchen)
+
+| | |
+|--|--|
+| **Role** | Puzzle → reveals **What** (the weapon) |
+| **Route** | *none yet* (suggested: `/manoir/cuisine`) |
+| **Status** | Planned |
+| **Clues** | **Salle de divination** (after that puzzle is solved) |
+
+**Intent:** Knives and other deadly cooking tools must be **paired with symbols**. Clues come from the solved Divination room.
+
+**On solve:** The kitchen reveals the **weapon of the crime** (**What** for the Bureau). Presentation TBD.
 
 ---
 
@@ -103,39 +146,60 @@ Clickable hotspots open each existing room. Hotspot overlays are still visually 
 | | |
 |--|--|
 | **Role** | Clue room (several puzzles) |
-| **Route** | *none yet* |
+| **Route** | *none yet* (suggested: `/manoir/bibliotheque`) |
 | **Status** | Planned |
 | **Folder note** | Study/library-related image assets may already exist under `assets` without a page |
 
-**Intent:** A shelf of books. Books contain **clues for different puzzles**, including (at least) the Serre plant descriptions. Exact book list and which clue maps to which puzzle: **TBD**.
+**Intent:** Shelves of **books and journals**. Clicking one opens a readable book — **same interaction pattern as the Atelier d’Art book**.
+
+**Clues hosted here (by design):**
+
+| Target puzzle | Clue content (high level) |
+|---------------|---------------------------|
+| Galerie | Portrait order / arrangement |
+| Véranda | Plant identification / placement |
+| Salle de divination | Tarot click order |
+
+Exact book/journal list and spoiler-safe wording: still to be written (optional spoiler appendix later).
 
 ---
 
-## Bureau (Office)
+## Bureau (Study)
 
 | | |
 |--|--|
-| **Role** | TBD |
-| **Route** | *none yet* |
+| **Role** | **Resolution** — validate the Manor |
+| **Route** | *none yet* (suggested: `/manoir/bureau`) |
 | **Status** | Planned |
 
-**Intent (provisional):** Possibly the **last Manor puzzle**, solvable only after the other Manor puzzles are solved. Purpose still to be decided.
+**Intent:** Detective-movie **board**. Once the player has the four crime facts (Who / What / Where / When), they **pin the correct clues** on the board.
+
+**Access:** Always reachable from the map. Wrong pins fail; no hard lock on entry.
+
+**On correct accusation:**
+
+1. **Now:** show a **Win message in a modal**.
+2. **Later:** also validate / mark Le Manoir complete on a future global hub.
 
 ---
 
 ## Summary table
 
-| Room | Type | Route | Status |
-|------|------|-------|--------|
-| Carte | Hub | `manoir/carte` | Partial |
-| Salle à manger | Puzzle | `manoir/salle-a-manger` | Partial |
-| Salle de musique | Puzzle | `manoir/salle-de-musique` | Partial |
-| Atelier d’Art | Clues → music | `manoir/atelier-d-arts` | Partial |
-| Galerie | Puzzle | `manoir/galerie` | Partial |
-| Serre | Puzzle | `manoir/serre` | Stub |
-| Bibliothèque | Clues (multi) | — | Planned |
-| Bureau | TBD (maybe finale) | — | Planned |
+| Room | Type | Route | Murder / reward | Status |
+|------|------|-------|-----------------|--------|
+| Carte | Hub | `manoir/carte` | — | Partial |
+| Galerie | Puzzle | `manoir/galerie` | Reveals **Who** | Partial |
+| Atelier d’Art | Clues → music | `manoir/atelier-d-arts` | — | Partial |
+| Véranda | Puzzle | `manoir/veranda` | Clues → Salle à manger | Stub |
+| Salle de musique | Puzzle | `manoir/salle-de-musique` | Reveals **Where** | Partial |
+| Salle à manger | Puzzle | `manoir/salle-a-manger` | Reveals **When** | Partial |
+| Salle de divination | Puzzle | — | Clues → Cuisine | Planned |
+| Cuisine | Puzzle | — | Reveals **What** | Planned |
+| Bibliothèque | Clues (multi) | — | Clues → Galerie, Véranda, Divination | Planned |
+| Bureau | Resolution | — | Accuse with Who / What / Where / When | Planned |
 
 ## Manor completion
 
-**What happens when every Manor puzzle is solved?** — **TBD.** Document this here when the design is fixed.
+1. Solve the puzzle rooms that yield the four facts (and their clue-chain rooms as needed).  
+2. Pin the correct **Who / What / Where / When** on the Bureau board.  
+3. Show a **Win modal**; later also mark the Manor complete on the global hub.

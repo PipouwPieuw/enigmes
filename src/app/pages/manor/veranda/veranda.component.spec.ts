@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 
-import { GreenhouseComponent } from './greenhouse.component';
+import { VerandaComponent } from './veranda.component';
 
-describe('GreenhouseComponent', () => {
-  let component: GreenhouseComponent;
-  let fixture: ComponentFixture<GreenhouseComponent>;
+describe('VerandaComponent', () => {
+  let component: VerandaComponent;
+  let fixture: ComponentFixture<VerandaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GreenhouseComponent],
+      imports: [VerandaComponent],
       providers: [provideRouter([])],
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GreenhouseComponent);
+    fixture = TestBed.createComponent(VerandaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

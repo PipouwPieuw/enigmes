@@ -50,8 +50,8 @@ export class MapComponent {
             height: '18%'
         },
         {
-            name: 'Serre',
-            route: '/manoir/serre',
+            name: 'Véranda',
+            route: '/manoir/veranda',
             posX: '27%',
             posY: '0%',
             width: '27%',

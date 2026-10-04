@@ -49,7 +49,7 @@ Control flow (`@if` / `@for`), `input()` on TopBar/Modal, OnPush on UI + rooms, 
 
 - In-app navigation uses `routerLink`; assets are base-href safe; `buildprod` → `dist/rutabaga`
 - `''` redirect + `**` wildcard present
-- French path segments (`serre`, `salle-a-manger`) with redirects from old English URLs
+- French path segments (`veranda`, `salle-a-manger`) with redirects from legacy URLs
 - `index.html` uses `lang="fr"`; `public/` favicon copied into the build
 
 ### 4. Accessibility
@@ -64,7 +64,7 @@ Modal dialog a11y (CDK focus trap, Escape, `role="dialog"`) and baseline `aria-l
 | `rxjs`, `zone.js`, `tslib` | Keep |
 | `jquery`, `jquery-ui`, `jqueryui`, `@types/jquery*` | Removed |
 | `@angular/forms`, `@angular/animations` | Removed until needed |
-| `@angular/cdk` | Kept (modal a11y; planned Serre drag-drop) |
+| `@angular/cdk` | Kept (modal a11y; planned Véranda drag-drop) |
 | Direct `sass` dependency | Removed (CLI Sass) |
 
 No urgent major-version upgrade required; finish idioms on 19.x before jumping to 20+.
@@ -75,7 +75,7 @@ No urgent major-version upgrade required; finish idioms on 19.x before jumping t
 - Legacy vendor prefixes in transform/placeholder mixins
 - Design tokens underused; rooms hardcode hex + debug colours
 - Google Fonts loaded via SCSS `@import url(...)` (prefer `<link>` in `index.html` or self-host)
-- BEM outliers (greenhouse hyphen block, music-room `.organ_*`)
+- BEM outliers (music-room `.organ_*`)
 
 ### 7. Tests & tooling
 
@@ -131,7 +131,7 @@ No urgent major-version upgrade required; finish idioms on 19.x before jumping t
 Technical work can proceed **in parallel** with Manor content:
 
 - Deploy/routing/a11y fixes protect everything you ship next
-- Dep cleanup reduces noise before adding Serre drag-drop (prefer **CDK**, not jQuery)
+- Dep cleanup reduces noise before adding Véranda drag-drop (prefer **CDK**, not jQuery)
 - Signals / progress service pair naturally with puzzle win conditions
 
 See [TODO §8 — Technical modernization](./TODO.md#8-technical-modernization).

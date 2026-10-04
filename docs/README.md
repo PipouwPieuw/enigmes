@@ -1,6 +1,6 @@
 # Documentation
 
-Living documentation for **Enigmes**. Some sections are intentionally incomplete: the global game goal and several rooms are still open design.
+Living documentation for **Enigmes**. Le Manoir’s murder goal and room graph are designed; several rooms and post-win UX are still open.
 
 ## Contents
 

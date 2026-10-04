@@ -13,7 +13,7 @@ Front-end technical overview. Keep this aligned with the code; product intent li
 | Tests | Karma + Jasmine |
 | Icons | Custom webfont under `src/assets/fonticon/` |
 
-Dependencies present but **not used in application code today:** `jquery`, `jquery-ui`, `@angular/cdk`, plus unused `@angular/forms` / `@angular/animations`. Prefer removing the jQuery stack; keep CDK only if modal a11y or Serre drag-drop will use it soon. See [technical audit](./technical-audit.md).
+Dependencies present but **not used in application code today:** `jquery`, `jquery-ui`, `@angular/cdk`, plus unused `@angular/forms` / `@angular/animations`. Prefer removing the jQuery stack; keep CDK only if modal a11y or Véranda drag-drop will use it soon. See [technical audit](./technical-audit.md).
 
 ## High-level structure
 
@@ -43,15 +43,15 @@ Routes are defined in `src/app/app.routes.ts`. All current routes belong to the 
 | `manoir/atelier-d-arts` | Atelier d'Art | `ArtRoomComponent` |
 | `manoir/salle-de-musique` | Salle de musique | `MusicRoomComponent` |
 | `manoir/galerie` | Galerie | `GalleryComponent` |
-| `manoir/serre` | Serre | `GreenhouseComponent` |
+| `manoir/veranda` | Véranda | `VerandaComponent` |
 | `manoir/salle-a-manger` | Salle à manger | `DiningRoomComponent` |
 
 Notes:
 
 - Default `''` → `manoir/carte`; unknown paths redirect via `**`.
-- Old English paths (`manoir/greenhouse`, `manoir/dining-room`) redirect to the French routes.
+- Legacy paths redirect: `manoir/serre` / `manoir/greenhouse` → `veranda`; `manoir/dining-room` → `salle-a-manger`.
 - In-app navigation uses `routerLink`.
-- Planned rooms (Bibliothèque, Bureau) have no routes yet.
+- **Planned routes:** `manoir/bibliotheque`, `manoir/salle-de-divination`, `manoir/cuisine`, `manoir/bureau`.
 - Future standalone game parts will likely use their own path prefixes (to be decided).
 
 ## Shared UI
