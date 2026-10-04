@@ -10,6 +10,7 @@
 		min-width: 700px;
 		background: #0f272f;
 		overflow: hidden;
+		background: url('../../../../assets/images/manor/dining-room/bg-dining-room.jpg');
 	}
 
 	&__clock_wrapper {
@@ -42,7 +43,6 @@
 		bottom: 0;
 		top: 0;
 		margin: auto;
-		transition: all .2s ease;
 		pointer-events: none;
 
 		img {
@@ -50,6 +50,10 @@
 			left: 0;
 			right: 0;
 			margin: auto;
+		}
+
+		&--animated {
+			transition: transform .2s ease;
 		}
 
 		&--digits img {	

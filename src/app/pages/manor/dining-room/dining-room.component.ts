@@ -36,6 +36,8 @@ export class DiningRoomComponent {
     readonly symbolsClockValue = signal(12);
     readonly symbolsClockRotation = signal(1);
     readonly transitionSpeed = signal(1);
+    /** Enabled on interaction only, so remount/init never tweens into pose. */
+    readonly transitionsEnabled = signal(false);
     readonly isWin = computed(() =>
         this.digitsValue() === this.correctClock.digits
         && this.symbolsValue() === this.correctClock.symbols
@@ -73,52 +75,68 @@ export class DiningRoomComponent {
     ];
 
     setDigitsRotation(value:number) {
-        const diff:number = this.getValDiff(this.digitsValue(), value);
-        let rotation = 0;
-        if(diff <= 6) {
-            rotation = diff * this.rotationStep;
-            this.digitsRotation.update((current) => current + rotation);
-        }
-        else {
-            rotation = (12 - diff) * this.rotationStep;
-            this.digitsRotation.update((current) => current - rotation);
-        }
-        this.digitsValue.set(value);
-        this.checkWin();
+        this.runWithTransitions(() => {
+            const diff:number = this.getValDiff(this.digitsValue(), value);
+            let rotation = 0;
+            if(diff <= 6) {
+                rotation = diff * this.rotationStep;
+                this.digitsRotation.update((current) => current + rotation);
+            }
+            else {
+                rotation = (12 - diff) * this.rotationStep;
+                this.digitsRotation.update((current) => current - rotation);
+            }
+            this.digitsValue.set(value);
+            this.checkWin();
+        });
     }
 
     setSymbolsRotation(value:number) {
-        const diff:number = this.getValDiff(this.symbolsValue(), value);
-        let rotation = 0;
-        if(diff <= 6) {
-            rotation = diff * this.rotationStep;
-            this.symbolsRotation.update((current) => current + rotation);
-        }
-        else {
-            rotation = (12 - diff) * this.rotationStep;
-            this.symbolsRotation.update((current) => current - rotation);
-        }
-        this.symbolsValue.set(value);
-        this.checkWin();
+        this.runWithTransitions(() => {
+            const diff:number = this.getValDiff(this.symbolsValue(), value);
+            let rotation = 0;
+            if(diff <= 6) {
+                rotation = diff * this.rotationStep;
+                this.symbolsRotation.update((current) => current + rotation);
+            }
+            else {
+                rotation = (12 - diff) * this.rotationStep;
+                this.symbolsRotation.update((current) => current - rotation);
+            }
+            this.symbolsValue.set(value);
+            this.checkWin();
+        });
     }
 
     setSymbolsClockRotation(value:number) {
-        const diff:number = this.getValDiff(this.symbolsClockValue(), value);
-        let rotation = 0;
-        let speed = 0;
-        if(diff <= 6) {
-            speed = diff;
-            rotation = diff * this.rotationStep;
-            this.symbolsClockRotation.update((current) => current - rotation);
+        this.runWithTransitions(() => {
+            const diff:number = this.getValDiff(this.symbolsClockValue(), value);
+            let rotation = 0;
+            let speed = 0;
+            if(diff <= 6) {
+                speed = diff;
+                rotation = diff * this.rotationStep;
+                this.symbolsClockRotation.update((current) => current - rotation);
+            }
+            else {
+                speed = 12 - diff;
+                rotation = (12 - diff) * this.rotationStep;
+                this.symbolsClockRotation.update((current) => current + rotation);
+            }
+            this.transitionSpeed.set(speed);
+            this.symbolsClockValue.set(value);
+            this.checkWin();
+        });
+    }
+
+    /** Arm CSS transitions before the first move so remount/init never tweens. */
+    private runWithTransitions(action: () => void): void {
+        if (this.transitionsEnabled()) {
+            action();
+            return;
         }
-        else {
-            speed = 12 - diff;
-            rotation = (12 - diff) * this.rotationStep;
-            this.symbolsClockRotation.update((current) => current + rotation);
-        }
-        this.transitionSpeed.set(speed);
-        this.symbolsClockValue.set(value);
-        this.checkWin();
+        this.transitionsEnabled.set(true);
+        requestAnimationFrame(() => action());
     }
 
     checkWin() {

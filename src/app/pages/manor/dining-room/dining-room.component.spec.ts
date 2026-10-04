@@ -17,10 +17,22 @@ describe('DiningRoomComponent', () => {
     fixture = TestBed.createComponent(DiningRoomComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    // Skip the first-interaction rAF arming path in interaction tests.
+    component.transitionsEnabled.set(true);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('keeps clock transitions off until a dial interaction', () => {
+    const localFixture = TestBed.createComponent(DiningRoomComponent);
+
+    expect(localFixture.componentInstance.transitionsEnabled()).toBeFalse();
+
+    localFixture.componentInstance.setDigitsRotation(3);
+
+    expect(localFixture.componentInstance.transitionsEnabled()).toBeTrue();
   });
 
   it('updates clock value signals through setters', () => {

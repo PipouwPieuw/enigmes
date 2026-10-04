@@ -47,7 +47,7 @@ export class MapComponent {
             posX: '85.5%',
             posY: '23%',
             width: '7%',
-            height: '18%'
+            height: '27%'
         },
         {
             name: 'Véranda',

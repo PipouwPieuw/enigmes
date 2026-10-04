@@ -5,7 +5,7 @@
 
 	&__box {
 		min-height: calc(100vh - $topBarHeight);
-		background: url('../../../../assets/images/manor/art-room/bg.png');
+		background: url('../../../../assets/images/manor/art-room/bg-art-room.png');
 		@include flexCenter;
 		min-width: 1270px;
 	}

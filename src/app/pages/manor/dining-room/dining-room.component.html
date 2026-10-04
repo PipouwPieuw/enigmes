@@ -11,22 +11,30 @@
 				class="app_dining_room__clock app_dining_room__clock--symbols"
 				[style]="'
 					transform: rotate(' + (45 + symbolsClockRotation()) + 'deg);
-					transition: all ' + (.3 * transitionSpeed()) + 's ease-in-out;
+					transition: all ' + (transitionsEnabled() ? .3 * transitionSpeed() : 0) + 's ease-in-out;
 				'"
 			>
 				<img [src]="imgPath + 'clock_symbols.png'" alt=""/>
-				<div class="app_dining_room__hand app_dining_room__hand--symbols" [style]="'transform: rotate(' + (symbolsRotation() - 45) + 'deg);'">
+				<div
+					class="app_dining_room__hand app_dining_room__hand--symbols"
+					[class.app_dining_room__hand--animated]="transitionsEnabled()"
+					[style]="'transform: rotate(' + (symbolsRotation() - 45) + 'deg);'"
+				>
 					<img [src]="imgPath + 'hand_symbols.png'" alt=""/>
 				</div>
 			</div>
-			<div class="app_dining_room__hand app_dining_room__hand--digits" [style]="'transform: rotate(' + digitsRotation() + 'deg);'">
+			<div
+				class="app_dining_room__hand app_dining_room__hand--digits"
+				[class.app_dining_room__hand--animated]="transitionsEnabled()"
+				[style]="'transform: rotate(' + digitsRotation() + 'deg);'"
+			>
 				<img [src]="imgPath + 'hand_digits.png'" alt=""/>
 			</div>
 			<ul
 				class="app_dining_room__list_triggers app_dining_room__list_triggers--symbols"
 				[style]="'
 					transform: rotate(' + symbolsClockRotation() + 'deg);
-					transition: all ' + (.3 * transitionSpeed()) + 's ease-in-out;
+					transition: all ' + (transitionsEnabled() ? .3 * transitionSpeed() : 0) + 's ease-in-out;
 				'"
 			>
 				@for (symbol of symbols; track symbol.value) {
