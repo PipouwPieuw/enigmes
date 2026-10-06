@@ -112,7 +112,7 @@ export class DiningRoomComponent {
         this.runWithTransitions(() => {
             const diff:number = this.getValDiff(this.symbolsClockValue(), value);
             let rotation = 0;
-            let speed = 0;
+            let speed: number;
             if(diff <= 6) {
                 speed = diff;
                 rotation = diff * this.rotationStep;

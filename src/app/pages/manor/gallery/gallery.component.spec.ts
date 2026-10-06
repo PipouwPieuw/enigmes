@@ -4,105 +4,118 @@ import { provideRouter } from '@angular/router';
 import { GalleryComponent } from './gallery.component';
 
 describe('GalleryComponent', () => {
-  let component: GalleryComponent;
-  let fixture: ComponentFixture<GalleryComponent>;
+    let component: GalleryComponent;
+    let fixture: ComponentFixture<GalleryComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [GalleryComponent],
-      providers: [provideRouter([])],
-    })
-    .compileComponents();
+    beforeEach(async () => {
+        // jsdom does not implement the Pointer Events capture APIs that Chrome provides.
+        const prototype = HTMLElement.prototype as HTMLElement & {
+            setPointerCapture?: (pointerId: number) => void;
+            releasePointerCapture?: (pointerId: number) => void;
+            hasPointerCapture?: (pointerId: number) => boolean;
+        };
+        prototype.setPointerCapture ??= () => undefined;
+        prototype.releasePointerCapture ??= () => undefined;
+        prototype.hasPointerCapture ??= () => false;
 
-    fixture = TestBed.createComponent(GalleryComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        await TestBed.configureTestingModule({
+            imports: [GalleryComponent],
+            providers: [provideRouter([])],
+        })
+            .compileComponents();
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+        fixture = TestBed.createComponent(GalleryComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('selects and deselects a portrait', () => {
-    component.selectPortrait(3);
-    expect(component.selectedPortrait()).toBe(3);
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 
-    component.selectPortrait(3);
-    expect(component.selectedPortrait()).toBe(-1);
-  });
+    it('selects and deselects a portrait', () => {
+        component.selectPortrait(3);
+        expect(component.selectedPortrait()).toBe(3);
 
-  it('swaps two portraits and clears selection', () => {
-    component.selectPortrait(0);
-    component.selectPortrait(7);
+        component.selectPortrait(3);
+        expect(component.selectedPortrait()).toBe(-1);
+    });
 
-    expect(component.portraits()).toEqual([7, 1, 2, 3, 4, 5, 6, 0]);
-    expect(component.selectedPortrait()).toBe(-1);
-    expect(component.isWin()).toBeFalse();
-  });
+    it('swaps two portraits and clears selection', () => {
+        component.selectPortrait(0);
+        component.selectPortrait(7);
 
-  it('sets isWin when portraits match the provisional correct order', () => {
-    expect(component.isWin()).toBeFalse();
+        expect(component.portraits()).toEqual([7, 1, 2, 3, 4, 5, 6, 0]);
+        expect(component.selectedPortrait()).toBe(-1);
+        expect(component.isWin()).toBe(false);
+    });
 
-    component.portraits.set([...component.correctOrder]);
+    it('sets isWin when portraits match the provisional correct order', () => {
+        expect(component.isWin()).toBe(false);
 
-    expect(component.isWin()).toBeTrue();
-  });
+        component.portraits.set([...component.correctOrder]);
 
-  it('drag-swaps two slots after pointer drop', fakeAsync(() => {
-    const buttons = fixture.nativeElement.querySelectorAll('.app_gallery__portrait_inner') as NodeListOf<HTMLButtonElement>;
-    const fromButton = buttons[0];
-    const toSlot = fixture.nativeElement.querySelector('[data-slot-index="7"]') as HTMLElement;
+        expect(component.isWin()).toBe(true);
+    });
 
-    const fromRect = fromButton.getBoundingClientRect();
-    const toRect = toSlot.getBoundingClientRect();
-    const startX = fromRect.left + fromRect.width / 2;
-    const startY = fromRect.top + fromRect.height / 2;
-    const endX = toRect.left + toRect.width / 2;
-    const endY = toRect.top + toRect.height / 2;
+    it('drag-swaps two slots after pointer drop', fakeAsync(() => {
+        const buttons = fixture.nativeElement.querySelectorAll('.app_gallery__portrait_inner') as NodeListOf<HTMLButtonElement>;
+        const fromButton = buttons[0];
+        const toSlot = fixture.nativeElement.querySelector('[data-slot-index="7"]') as HTMLElement;
 
-    fromButton.dispatchEvent(new PointerEvent('pointerdown', {
-      bubbles: true,
-      button: 0,
-      pointerId: 1,
-      clientX: startX,
-      clientY: startY,
+        const fromRect = fromButton.getBoundingClientRect();
+        const toRect = toSlot.getBoundingClientRect();
+        const startX = fromRect.left + fromRect.width / 2;
+        const startY = fromRect.top + fromRect.height / 2;
+        const endX = toRect.left + toRect.width / 2;
+        const endY = toRect.top + toRect.height / 2;
+
+        if (typeof document.elementsFromPoint !== 'function') {
+            document.elementsFromPoint = () => [];
+        }
+        vi.spyOn(document, 'elementsFromPoint').mockReturnValue([toSlot]);
+
+        fromButton.dispatchEvent(new PointerEvent('pointerdown', {
+            bubbles: true,
+            button: 0,
+            pointerId: 1,
+            clientX: startX,
+            clientY: startY,
+        }));
+
+        fromButton.dispatchEvent(new PointerEvent('pointermove', {
+            bubbles: true,
+            pointerId: 1,
+            clientX: startX + 20,
+            clientY: startY + 20,
+        }));
+        fixture.detectChanges();
+
+        expect(component.draggingSlot()).toBe(0);
+
+        fromButton.dispatchEvent(new PointerEvent('pointerup', {
+            bubbles: true,
+            pointerId: 1,
+            clientX: endX,
+            clientY: endY,
+        }));
+        fixture.detectChanges();
+
+        expect(component.isAnimating()).toBe(true);
+
+        tick(320);
+        fixture.detectChanges();
+
+        expect(component.portraits()).toEqual([7, 1, 2, 3, 4, 5, 6, 0]);
+        expect(component.draggingSlot()).toBeNull();
+        expect(component.isAnimating()).toBe(false);
     }));
 
-    fromButton.dispatchEvent(new PointerEvent('pointermove', {
-      bubbles: true,
-      pointerId: 1,
-      clientX: startX + 20,
-      clientY: startY + 20,
-    }));
-    fixture.detectChanges();
+    it('ignores click after a drag gesture', () => {
+        component['suppressClick'] = true;
+        component.onPortraitClick(2);
 
-    expect(component.draggingSlot()).toBe(0);
-
-    spyOn(document, 'elementsFromPoint').and.returnValue([toSlot]);
-
-    fromButton.dispatchEvent(new PointerEvent('pointerup', {
-      bubbles: true,
-      pointerId: 1,
-      clientX: endX,
-      clientY: endY,
-    }));
-    fixture.detectChanges();
-
-    expect(component.isAnimating()).toBeTrue();
-
-    tick(320);
-    fixture.detectChanges();
-
-    expect(component.portraits()).toEqual([7, 1, 2, 3, 4, 5, 6, 0]);
-    expect(component.draggingSlot()).toBeNull();
-    expect(component.isAnimating()).toBeFalse();
-  }));
-
-  it('ignores click after a drag gesture', () => {
-    component['suppressClick'] = true;
-    component.onPortraitClick(2);
-
-    expect(component.selectedPortrait()).toBe(-1);
-    expect(component['suppressClick']).toBeFalse();
-  });
+        expect(component.selectedPortrait()).toBe(-1);
+        expect(component['suppressClick']).toBe(false);
+    });
 });

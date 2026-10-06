@@ -6,11 +6,11 @@ Front-end technical overview. Keep this aligned with the code; product intent li
 
 | Layer | Choice |
 |-------|--------|
-| Framework | Angular 19 — standalone components, no NgModules |
+| Framework | Angular 22 — standalone components, no NgModules |
 | Language | TypeScript |
 | Styling | SCSS; BEM blocks prefixed with `app_` |
 | Routing | `@angular/router` via `provideRouter` |
-| Tests | Karma + Jasmine |
+| Tests | Vitest |
 | Icons | Custom webfont under `src/assets/fonticon/` |
 
 Dependencies present but **not used in application code today:** `jquery`, `jquery-ui`, `@angular/cdk`, plus unused `@angular/forms` / `@angular/animations`. Prefer removing the jQuery stack; keep CDK only if modal a11y or Véranda drag-drop will use it soon. See [technical audit](./technical-audit.md).

@@ -191,7 +191,7 @@ These should be answered before some implementation work can finish properly.
 ## 8. Technical modernization
 
 Full write-up: [technical-audit.md](./technical-audit.md).  
-Stack is already on **Angular 19**; §8.1 / §8.2 are done. Remaining work is scale/tooling (§8.3), not a framework upgrade.
+Stack is on **Angular 22**; §8.1 / §8.2 are done. Remaining work is scale/tooling (§8.3).
 
 ### 8.1 Must (do soon — correctness / deploy / a11y baseline)
 
@@ -227,8 +227,8 @@ Stack is already on **Angular 19**; §8.1 / §8.2 are done. Remaining work is sc
 - [x] Real unit tests for chord matching, gallery order, clock validation, modal toggle
 - [x] Add `angular-eslint` (+ optional Prettier) and an `npm run lint` script
 - [x] CI pipeline: install → lint → test → build
-- [ ] Later: evaluate Vitest; evaluate zoneless after signals are in place
-- [x] Stay on Angular 19.x patches; plan 20+ only after control-flow / `input()` migration
+- [x] Unit tests run on Vitest; zoneless remains unevaluated
+- [x] Upgrade from Angular 19 to Angular 22 (Node 24)
 
 ---
 

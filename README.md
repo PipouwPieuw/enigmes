@@ -27,10 +27,10 @@ The overarching win condition (what happens when a part â€” or the whole game â€
 
 ## Stack
 
-- Angular 19 (standalone components)
+- Angular 22 (standalone components)
 - TypeScript
 - SCSS (BEM with `app_` prefix)
-- Karma / Jasmine for unit tests
+- Vitest for unit tests
 
 ## Local development
 
