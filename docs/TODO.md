@@ -89,7 +89,7 @@ These should be answered before some implementation work can finish properly.
 ## 2. Le Manoir — new rooms
 
 ### Bibliothèque
-- [ ] Create page + route (`manoir/bibliotheque`)
+- [x] Create page + route (`manoir/bibliotheque`)
 - [ ] Shelf / books & journals UI
 - [ ] Reader UX aligned with Atelier d’Art book
 - [ ] Book content: Galerie portrait-order clues
@@ -99,7 +99,7 @@ These should be answered before some implementation work can finish properly.
 - [ ] Info copy
 
 ### Salle de divination
-- [ ] Create page + route (`manoir/salle-de-divination`)
+- [x] Create page + route (`manoir/salle-de-divination`)
 - [ ] Tarot set UI — click cards in correct order
 - [ ] Win: cards flip and show **Cuisine** clues
 - [ ] Map hotspot + assets
@@ -107,7 +107,7 @@ These should be answered before some implementation work can finish properly.
 - [ ] Report completion to Manor progress (when it exists)
 
 ### Cuisine
-- [ ] Create page + route (`manoir/cuisine`)
+- [x] Create page + route (`manoir/cuisine`)
 - [ ] Pair deadly tools with symbols
 - [ ] Clues consumed from solved Divination
 - [ ] Win: reveal **What** (weapon)
@@ -116,7 +116,7 @@ These should be answered before some implementation work can finish properly.
 - [ ] Report completion to Manor progress (when it exists)
 
 ### Bureau
-- [ ] Create page + route (`manoir/bureau`) — always accessible from the map
+- [x] Create page + route (`manoir/bureau`) — always accessible from the map
 - [ ] Detective board UI — pin **Who / What / Where / When**
 - [ ] Validate accusation; on success show **Win modal**
 - [ ] Later: also mark Manor complete on the future global hub

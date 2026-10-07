@@ -24,10 +24,10 @@ Carte (house plan)
  ├── Véranda
  ├── Salle de musique
  ├── Salle à manger
- ├── Salle de divination  (planned)
- ├── Cuisine              (planned)
- ├── Bibliothèque         (planned)
- └── Bureau              (planned — resolution)
+ ├── Salle de divination
+ ├── Cuisine
+ ├── Bibliothèque
+ └── Bureau              (resolution)
 ```
 
 1. Open the map (`/manoir/carte`).

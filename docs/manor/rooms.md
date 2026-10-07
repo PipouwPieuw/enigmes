@@ -116,13 +116,15 @@ into each of **3 valid combinations**. Each valid combination lights an **indica
 | | |
 |--|--|
 | **Role** | Puzzle → unlocks **clues for the Cuisine** |
-| **Route** | *none yet* (suggested: `/manoir/salle-de-divination`) |
-| **Status** | Planned |
+| **Route** | `/manoir/salle-de-divination` |
+| **Status** | Stub |
 | **Clues** | **Bibliothèque** |
 
 **Intent:** A set of **tarot cards**. The player clicks them in the **correct order**. Clues for the order are in the Library.
 
 **On solve:** Cards **flip** and show clues needed to solve the **Cuisine** puzzle.
+
+**In code:** Placeholder page (`DivinationRoomComponent`).
 
 ---
 
@@ -131,13 +133,15 @@ into each of **3 valid combinations**. Each valid combination lights an **indica
 | | |
 |--|--|
 | **Role** | Puzzle → reveals **What** (the weapon) |
-| **Route** | *none yet* (suggested: `/manoir/cuisine`) |
-| **Status** | Planned |
+| **Route** | `/manoir/cuisine` |
+| **Status** | Stub |
 | **Clues** | **Salle de divination** (after that puzzle is solved) |
 
 **Intent:** Knives and other deadly cooking tools must be **paired with symbols**. Clues come from the solved Divination room.
 
 **On solve:** The kitchen reveals the **weapon of the crime** (**What** for the Bureau). Presentation TBD.
+
+**In code:** Placeholder page (`KitchenComponent`).
 
 ---
 
@@ -146,9 +150,8 @@ into each of **3 valid combinations**. Each valid combination lights an **indica
 | | |
 |--|--|
 | **Role** | Clue room (several puzzles) |
-| **Route** | *none yet* (suggested: `/manoir/bibliotheque`) |
-| **Status** | Planned |
-| **Folder note** | Study/library-related image assets may already exist under `assets` without a page |
+| **Route** | `/manoir/bibliotheque` |
+| **Status** | Stub |
 
 **Intent:** Shelves of **books and journals**. Clicking one opens a readable book — **same interaction pattern as the Atelier d’Art book**.
 
@@ -162,6 +165,8 @@ into each of **3 valid combinations**. Each valid combination lights an **indica
 
 Exact book/journal list and spoiler-safe wording: still to be written (optional spoiler appendix later).
 
+**In code:** Placeholder page (`LibraryComponent`).
+
 ---
 
 ## Bureau (Study)
@@ -169,8 +174,8 @@ Exact book/journal list and spoiler-safe wording: still to be written (optional 
 | | |
 |--|--|
 | **Role** | **Resolution** — validate the Manor |
-| **Route** | *none yet* (suggested: `/manoir/bureau`) |
-| **Status** | Planned |
+| **Route** | `/manoir/bureau` |
+| **Status** | Stub |
 
 **Intent:** Detective-movie **board**. Once the player has the four crime facts (Who / What / Where / When), they **pin the correct clues** on the board.
 
@@ -180,6 +185,8 @@ Exact book/journal list and spoiler-safe wording: still to be written (optional 
 
 1. **Now:** show a **Win message in a modal**.
 2. **Later:** also validate / mark Le Manoir complete on a future global hub.
+
+**In code:** Placeholder page (`StudyComponent`). Always linked from the map.
 
 ---
 
@@ -193,10 +200,10 @@ Exact book/journal list and spoiler-safe wording: still to be written (optional 
 | Véranda | Puzzle | `manoir/veranda` | Clues → Salle à manger | Stub |
 | Salle de musique | Puzzle | `manoir/salle-de-musique` | Reveals **Where** | Partial |
 | Salle à manger | Puzzle | `manoir/salle-a-manger` | Reveals **When** | Partial |
-| Salle de divination | Puzzle | — | Clues → Cuisine | Planned |
-| Cuisine | Puzzle | — | Reveals **What** | Planned |
-| Bibliothèque | Clues (multi) | — | Clues → Galerie, Véranda, Divination | Planned |
-| Bureau | Resolution | — | Accuse with Who / What / Where / When | Planned |
+| Salle de divination | Puzzle | `manoir/salle-de-divination` | Clues → Cuisine | Stub |
+| Cuisine | Puzzle | `manoir/cuisine` | Reveals **What** | Stub |
+| Bibliothèque | Clues (multi) | `manoir/bibliotheque` | Clues → Galerie, Véranda, Divination | Stub |
+| Bureau | Resolution | `manoir/bureau` | Accuse with Who / What / Where / When | Stub |
 
 ## Manor completion
 

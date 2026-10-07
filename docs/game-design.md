@@ -31,10 +31,10 @@ Players investigate a murder (*Clue*-style) by navigating rooms from a **house p
 | Véranda | Puzzle — unlocks clock clues; clues in Bibliothèque *(stub)* |
 | Salle de musique | Puzzle — reveals **Where**; clues in Atelier d’Art |
 | Salle à manger | Puzzle — reveals **When**; clues from solved Véranda |
-| Salle de divination | Puzzle — unlocks Cuisine clues; clues in Bibliothèque *(planned)* |
-| Cuisine | Puzzle — reveals **What** (weapon); clues from solved Divination *(planned)* |
-| Bibliothèque | Clue books for Galerie, Véranda, Divination *(planned)* |
-| Bureau | Resolution — pin Who / What / Where / When *(planned)* |
+| Salle de divination | Puzzle — unlocks Cuisine clues; clues in Bibliothèque *(stub)* |
+| Cuisine | Puzzle — reveals **What** (weapon); clues from solved Divination *(stub)* |
+| Bibliothèque | Clue books for Galerie, Véranda, Divination *(stub)* |
+| Bureau | Resolution — pin Who / What / Where / When *(stub)* |
 
 ## Open questions
 

@@ -1,0 +1,5 @@
+@use "../../../../styles/includes.scss" as *;
+
+.app_divination_room {
+	min-height: calc(100vh - $topBarHeight);
+}

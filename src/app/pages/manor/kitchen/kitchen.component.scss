@@ -1,0 +1,5 @@
+@use "../../../../styles/includes.scss" as *;
+
+.app_kitchen {
+	min-height: calc(100vh - $topBarHeight);
+}

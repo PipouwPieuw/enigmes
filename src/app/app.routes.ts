@@ -13,7 +13,7 @@ export const routes: Routes = [
 	        import('./pages/manor/map/map.component').then((m) => m.MapComponent),
 	},
 	{
-	    path: 'manoir/atelier-d-arts',
+	    path: 'manoir/atelier-d-art',
 	    title: 'Atelier d\'Art',
 	    loadComponent: () =>
 	        import('./pages/manor/art-room/art-room.component').then((m) => m.ArtRoomComponent),
@@ -41,6 +41,30 @@ export const routes: Routes = [
 	    title: 'Salle à manger',
 	    loadComponent: () =>
 	        import('./pages/manor/dining-room/dining-room.component').then((m) => m.DiningRoomComponent),
+	},
+	{
+	    path: 'manoir/bibliotheque',
+	    title: 'Bibliothèque',
+	    loadComponent: () =>
+	        import('./pages/manor/library/library.component').then((m) => m.LibraryComponent),
+	},
+	{
+	    path: 'manoir/cuisine',
+	    title: 'Cuisine',
+	    loadComponent: () =>
+	        import('./pages/manor/kitchen/kitchen.component').then((m) => m.KitchenComponent),
+	},
+	{
+	    path: 'manoir/salle-de-divination',
+	    title: 'Salle de divination',
+	    loadComponent: () =>
+	        import('./pages/manor/divination-room/divination-room.component').then((m) => m.DivinationRoomComponent),
+	},
+	{
+	    path: 'manoir/bureau',
+	    title: 'Bureau',
+	    loadComponent: () =>
+	        import('./pages/manor/study/study.component').then((m) => m.StudyComponent),
 	},
 	{
 	    path: 'manoir/serre',

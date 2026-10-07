@@ -34,6 +34,8 @@ The overarching win condition (what happens when a part â€” or the whole game â€
 
 ## Local development
 
+node 24
+
 ```bash
 npm install
 npm start

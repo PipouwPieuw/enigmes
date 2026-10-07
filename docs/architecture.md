@@ -45,13 +45,17 @@ Routes are defined in `src/app/app.routes.ts`. All current routes belong to the 
 | `manoir/galerie` | Galerie | `GalleryComponent` |
 | `manoir/veranda` | Véranda | `VerandaComponent` |
 | `manoir/salle-a-manger` | Salle à manger | `DiningRoomComponent` |
+| `manoir/bibliotheque` | Bibliothèque | `LibraryComponent` |
+| `manoir/cuisine` | Cuisine | `KitchenComponent` |
+| `manoir/salle-de-divination` | Salle de divination | `DivinationRoomComponent` |
+| `manoir/bureau` | Bureau | `StudyComponent` |
 
 Notes:
 
 - Default `''` → `manoir/carte`; unknown paths redirect via `**`.
 - Legacy paths redirect: `manoir/serre` / `manoir/greenhouse` → `veranda`; `manoir/dining-room` → `salle-a-manger`.
 - In-app navigation uses `routerLink`.
-- **Planned routes:** `manoir/bibliotheque`, `manoir/salle-de-divination`, `manoir/cuisine`, `manoir/bureau`.
+- Bibliothèque, Cuisine, Salle de divination, and Bureau are stub pages (route + placeholder only).
 - Future standalone game parts will likely use their own path prefixes (to be decided).
 
 ## Shared UI
