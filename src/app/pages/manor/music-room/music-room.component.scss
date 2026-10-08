@@ -24,6 +24,14 @@
 		display: flex;
 		// transform: perspective(237px) rotateX(10deg);
 		transform: perspective(12.5vw) rotateX(10deg);
+
+		&:before {
+			content: '';
+			position: absolute;
+			z-index: -1;
+			inset: 0 0 1.8vw 0;
+			background: black;
+		}
 	}
 
 	&__keyboard_front {		
@@ -88,7 +96,9 @@
 	font-weight: 700;
 
 	&--active {
-		background: blue;
+		// background: blue;
+		@include rotateX(12deg);
+		height: 9.5vw;
 	}
 }
 
@@ -99,6 +109,6 @@
 	background: #ecd0b6;
 
 	&--active {
-		background: blue;
+		// background: blue;
 	}
 }
