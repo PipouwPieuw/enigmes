@@ -25,6 +25,6 @@
 		cdkTrapFocus
 		[cdkTrapFocusAutoCapture]="true"
 	>
-		<span [id]="descriptionId">{{ text() }}</span>
+		<div class="app_modal__content rte" [id]="descriptionId" [innerHTML]="text()"></div>
 	</div>
 }

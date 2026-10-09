@@ -32,11 +32,11 @@ These should be answered before some implementation work can finish properly.
 ## 1. Le Manoir — finish existing rooms
 
 ### Carte
-- [ ] Remove or hide debug hotspot styling (red overlays)
-- [ ] Restore proper hover / hit-area behaviour
-- [ ] Wire hotspots for **Bibliothèque**, **Bureau**, **Salle de divination**, **Cuisine**, and renamed **Véranda** when those rooms exist
-- [ ] Replace placeholder info text with real copy
-- [ ] Accessible names on room hotspots (not `title` alone)
+- [x] Remove or hide debug hotspot styling (red overlays)
+- [x] Restore proper hover / hit-area behaviour
+- [x] Wire hotspots for **Bibliothèque**, **Bureau**, **Salle de divination**, **Cuisine**, and renamed **Véranda** when those rooms exist
+- [x] Replace placeholder info text with real copy
+- [x] Accessible names on room hotspots (not `title` alone)
 
 ### Salle de musique
 - [ ] Replace `console.log("WIN")` with player feedback + **Where** reveal (crime location on/around the organ)

@@ -10,7 +10,9 @@
 					[title]="room.name"
 					[attr.aria-label]="room.name"
 					[style]="'top:' + room.posY + '; left:' + room.posX + '; width:' + room.width + '; height:' + room.height + ';' "
-				></a>
+				>
+					<span class="sr_only">{{ room.name }}</span>
+				</a>
 			}
 		</div>
 	</div>

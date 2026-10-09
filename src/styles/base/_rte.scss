@@ -1,0 +1,18 @@
+@use "../abstracts/abstracts" as *;
+
+.rte {
+    display: flex;
+    flex-direction: column;
+    gap: rem(16px);
+
+    p,
+    li {
+        font-size: rem(16px);
+        line-height: rem(24px);
+    }
+
+    ul {
+        list-style: disc;
+        padding-left: rem(24px);
+    }
+}

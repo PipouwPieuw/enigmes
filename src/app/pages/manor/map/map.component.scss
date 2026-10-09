@@ -16,13 +16,20 @@
 		height: 600px;
 	}
 
+	&__picture {
+		position: relative;
+		z-index: 2;
+		pointer-events: none;
+	}
+
 	&__room {
 		position: absolute;
-		// background: red;
-		// opacity: .3;
+		z-index: 1;
+		background: white;
+		opacity: .1;
 
 		&:not(:hover) {
-			// opacity: 0;
+			opacity: 0;
 		}
 	}
 }

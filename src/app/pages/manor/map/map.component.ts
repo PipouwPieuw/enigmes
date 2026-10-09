@@ -28,9 +28,9 @@ export class MapComponent {
         {
             name: 'Salle de musique',
             route: '/manoir/salle-de-musique',
-            posX: '11.8%',
+            posX: '10.5%',
             posY: '17%',
-            width: '13%',
+            width: '14.5%',
             height: '37%'
         },
         {
@@ -52,25 +52,25 @@ export class MapComponent {
         {
             name: 'Véranda',
             route: '/manoir/veranda',
-            posX: '27%',
+            posX: '26.5%',
             posY: '0%',
-            width: '27%',
+            width: '28%',
             height: '23%'
         },
         {
             name: 'Salle à manger',
             route: '/manoir/salle-a-manger',
             posX: '37%',
-            posY: '53%',
+            posY: '52.5%',
             width: '18%',
-            height: '20%'
+            height: '20.5%'
         },
         {
             name: 'Bibliothèque',
             route: '/manoir/bibliotheque',
-            posX: '11.8%',
+            posX: '10.5%',
             posY: '55%',
-            width: '13%',
+            width: '14.5%',
             height: '28%'
         },
         {
@@ -92,11 +92,11 @@ export class MapComponent {
         {
             name: 'Bureau',
             route: '/manoir/bureau',
-            posX: '56%',
+            posX: '55.5%',
             posY: '66.5%',
-            width: '13.5%',
-            height: '16%'
+            width: '15%',
+            height: '16.5%'
         }
     ];
-    pageText = "Texte d'explication de la page";
+    pageText = "<p>Ce manoir a été le théâtre d'un crime sordide. La police n'étant pas parvenue à résoudre l'affaire, vous avez été appelé sur les lieux en votre qualité de détective médium.</p> <p>Parcourez la demeure et tentez de résoudre les énigmes. Les esprits conscentiront peut-être à vous aiguiller vers la solution.</p> <p>Objectifs :</p>  <ul><li>Trouver le lieu du crime</li><li>Trouver l'arme du crime</li><li>Trouver l'heure du crime</li><li>Trouver le coupable.</li></ul>";
 }
