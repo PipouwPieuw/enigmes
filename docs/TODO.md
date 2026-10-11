@@ -39,13 +39,13 @@ These should be answered before some implementation work can finish properly.
 - [x] Accessible names on room hotspots (not `title` alone)
 
 ### Salle de musique
-- [ ] Replace `console.log("WIN")` with player feedback + **Where** reveal (crime location on/around the organ)
+- [x] Replace `console.log("WIN")` with player feedback + **Where** reveal (crime location on/around the organ)
 - [ ] Report completion to a shared Manor progress layer (when it exists)
-- [ ] Fix pause/reset bug (`playingSound == 0` should assign) — verify if still open after modernization
-- [ ] Remove debug keyboard styling (blue backgrounds)
-- [ ] Replace placeholder info text
-- [ ] Verify chord ↔ Atelier d’Art picture mapping against final art
-- [ ] Stop recreating key/chord arrays in the template if any remain (`[].constructor(n)` → stable arrays)
+- [x] Fix pause/reset bug (`playingSound == 0` should assign) — verify if still open after modernization
+- [x] Remove debug keyboard styling (blue backgrounds)
+- [x] Replace placeholder info text
+- [x] Verify chord ↔ Atelier d’Art picture mapping against final art
+- [x] Stop recreating key/chord arrays in the template if any remain (`[].constructor(n)` → stable arrays)
 
 ### Atelier d’Art
 - [ ] Confirm each artwork clearly encodes 3 sound-items → one chord

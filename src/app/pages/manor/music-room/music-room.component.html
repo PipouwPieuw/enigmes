@@ -3,27 +3,41 @@
 	<div class="app_music_room__organ">
 		<div class="app_music_room__chords">
 			@for (chord of chords; track chord.icon; let i = $index) {
-				<div class="app_music_room__chord" [class]="'app_music_room__chord--' + i">
-					<div class="organ_chord" [class.organ_chord--active]="activeChords().has(i)">
-						<span class="organ_chord__icon webfont" [class]="'webfont-' + chord.icon"></span>
+				<div
+					[class]="'app_music_room__chord app_music_room__chord--' + i + (hiddenChords().has(i) ? ' app_music_room__chord--hidden' : '')"
+				>
+					<div
+						class="organ_chord"
+						[class.organ_chord--active]="activeChords().has(i) || (revealDone() && chord.icon === crimeIcon)"
+					>
+						<span
+							[class]="'organ_chord__icon webfont webfont-' + displayedIcons()[i]"
+						></span>
 					</div>
 				</div>
 			}
 		</div>
-		<div class="app_music_room__keyboard">
+		<div class="app_music_room__keyboard" [class.app_music_room__keyboard--locked]="inputLocked()">
 			@for (keyIndex of keyIndexes; track keyIndex) {
 				<div class="app_music_room__key">
-					<button class="organ_key" [class.organ_key--active]="activeKeys().has(keyIndex)" (click)="keyPressed(keyIndex)">{{ keyIndex }}</button>
+					<button
+						type="button"
+						class="organ_key"
+						[class.organ_key--active]="activeKeys().has(keyIndex)"
+						[disabled]="inputLocked()"
+						(click)="keyPressed(keyIndex)"
+					>{{ keyIndex }}</button>
 				</div>
 			}
 		</div>
-		<div class="app_music_room__keyboard_front">
+		<div class="app_music_room__keyboard_front" [class.app_music_room__keyboard_front--locked]="inputLocked()">
 			@for (keyIndex of keyIndexes; track keyIndex) {
 				<div class="app_music_room__key">
 					<button
 						type="button"
 						class="organ_key_front"
 						[class.organ_key_front--active]="activeKeys().has(keyIndex)"
+						[disabled]="inputLocked()"
 						[attr.aria-label]="'Touche ' + keyIndex"
 						(click)="keyPressed(keyIndex)"
 					></button>
@@ -31,4 +45,13 @@
 			}
 		</div>
 	</div>
+	@if (debug()) {
+		<button
+			type="button"
+			class="app_music_room__debug_reveal"
+			(click)="startReveal()"
+		>
+			Tester la révélation
+		</button>
+	}
 </div>
